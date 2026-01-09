@@ -1,0 +1,229 @@
+/* * Sadeem Network - Login Page Specific Styles
+ * Extends the global CSS with focused layout and specialized components
+ */
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+}
+
+.login-container {
+  background-color: white;
+  width: 100%;
+  max-width: 450px;
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  border: 1px solid var(--color-light);
+}
+
+/* Logo Section */
+.logo-section {
+  margin-block-end: 2rem;
+}
+
+.logo-text {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-block-end: 0.5rem;
+}
+
+.logo-subtitle {
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.clock {
+  font-size: 0.85rem;
+  color: var(--color-secondary);
+  background-color: var(--color-bg);
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  display: inline-block;
+  margin-block-start: 0.5rem;
+}
+
+/* Form Elements Extension */
+.login-container h1 {
+  font-size: 1.5rem;
+  margin-block-end: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.login-container h1::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-light);
+}
+
+.login-container .form-group {
+  text-align: right;
+  transition: transform 0.2s ease-in-out;
+}
+
+.login-container input {
+  /* Utilizing global .input styles with tweaks */
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  border: 2px solid var(--color-light);
+  font-family: var(--font-family);
+}
+
+.login-container button[type="submit"] {
+  /* Inherits from .btn and .btn-primary logic */
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-block-start: 1rem;
+  transition: var(--transition);
+}
+
+.login-container button[type="submit"]:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-2px);
+}
+
+/* Error Messages */
+.error-message {
+  background-color: #fff1f0;
+  color: #d85c5c;
+  padding: 0.8rem;
+  border-radius: var(--radius);
+  border-right: 4px solid #d85c5c;
+  margin-block-end: 1.5rem;
+  font-size: 0.9rem;
+  text-align: right;
+  display: none; /* Controlled by JS/Flask */
+}
+
+/* Divider & Footer Link */
+.divider {
+  margin-block: 2rem;
+  position: relative;
+  border-top: 1px solid var(--color-light);
+}
+
+.divider span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding-inline: 1rem;
+  color: var(--color-secondary);
+  font-size: 0.9rem;
+}
+
+.register-link {
+  font-size: 0.95rem;
+  color: var(--color-secondary);
+}
+
+.register-link a {
+  font-weight: 700;
+  color: var(--color-accent);
+  margin-inline-start: 0.3rem;
+}
+
+.register-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 480px) {
+  .login-container {
+    padding: 1.5rem;
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+  }
+  
+  body {
+    background-color: white; /* Simpler mobile look */
+  }
+}
+/* =========================
+   Mobile & Small Devices
+   ========================= */
+
+@media (max-width: 768px) {
+  body {
+    align-items: flex-start;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .login-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+
+  body {
+    padding: 1rem;
+    min-height: 100svh; /* أفضل دعم للجوال */
+  }
+
+  .login-container {
+    padding: 1.5rem 1.2rem;
+    border-radius: 16px;
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
+  }
+
+  .logo-subtitle {
+    font-size: 1rem;
+  }
+
+  .clock {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.8rem;
+  }
+
+  .login-container h1 {
+    font-size: 1.25rem;
+  }
+
+  .login-container input {
+    font-size: 1rem;
+    padding: 0.75rem 0.9rem;
+  }
+
+  .login-container button[type="submit"] {
+    font-size: 1rem;
+    padding: 0.9rem;
+  }
+
+  .error-message {
+    font-size: 0.85rem;
+  }
+
+  .divider span {
+    font-size: 0.8rem;
+  }
+
+  .register-link {
+    font-size: 0.9rem;
+  }
+}

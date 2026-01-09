@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+    <title>شبكة سديم | منصة الخدمات الرقمية</title>
+<style>/* * Sadeem Network - Services Page Specific Styles
+ * Focuses on dynamic grids, category tags, and interactive nebula cards.
+ */
+
+:root {
+  --classic-gold: #DFB6B2; /* Matching the light support color from main palette */
+  --tech-cyan: #854F6C;    /* Matching the accent color for tech highlights */
+}
+
+/* --- Header & Layout --- */
+.nebula-header {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--color-secondary);
+}
+
+.logo-brand {
+  font-weight: 900;
+  letter-spacing: 2px;
+  font-size: 1.2rem;
+}
+
+.user-info {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.services-layout {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* --- Section Banners --- */
+.section-banner {
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  margin-block-end: 3rem;
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  text-align: right;
+  border-right: 6px solid var(--color-accent);
+}
+
+.banner-classic {
+  background: linear-gradient(to left, var(--color-primary), var(--color-secondary));
+}
+
+.banner-tech {
+  background: linear-gradient(to left, var(--color-deep), var(--color-primary));
+}
+
+.section-banner h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.8rem;
+}
+
+.section-banner p {
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* --- Cards Grid --- */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-block-end: 5rem;
+}
+
+/* --- Nebula Card Design --- */
+.nebula-card {
+  background-color: white;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  border: 1px solid var(--color-light);
+}
+
+.nebula-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(25, 0, 25, 0.15);
+}
+
+.category-tag {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: var(--color-accent);
+  color: white;
+  padding: 0.3rem 1rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  z-index: 1;
+}
+
+.nebula-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: calc(var(--radius) - 4px);
+  margin-bottom: 1.2rem;
+}
+
+.nebula-card h3 {
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  margin-bottom: 0.8rem;
+}
+
+.nebula-card p {
+  font-size: 0.95rem;
+  color: var(--color-secondary);
+  line-height: 1.5;
+  flex-grow: 1;
+  margin-bottom: 1.2rem;
+}
+
+/* --- Price Text --- */
+.price-text {
+  font-weight: 800;
+  font-size: 1.2rem;
+  margin-block-end: 1.2rem;
+}
+
+.gold-text { color: #b08d57; } /* Classic gold feel */
+.cyan-text { color: var(--color-accent); }
+
+/* --- Action Area & Buttons --- */
+.action-area {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.btn-nebula {
+  padding: 0.8rem 1.2rem;
+  border-radius: var(--radius);
+  font-weight: 700;
+  text-align: center;
+  flex-grow: 1;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-free {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.btn-wa {
+  background-color: #25D366; /* WhatsApp Green */
+  color: white;
+}
+
+.btn-share {
+  background-color: var(--color-bg);
+  color: var(--color-primary);
+  flex-grow: 0;
+  width: 45px;
+}
+
+.btn-nebula:hover {
+  filter: brightness(1.1);
+  transform: scale(1.02);
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .nebula-header {
+    flex-direction: column;
+    gap: 0.8rem;
+    text-align: center;
+  }
+
+  .services-layout {
+    padding: 1rem;
+  }
+
+  .section-banner {
+    padding: 1.5rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="nebula-header">
+    <div class="logo-brand">SADEEM NETWORK</div>
+    <div class="user-info">مرحباً، {{ username }} | {{ current_time }}</div>
+</header>
+
+<main class="services-layout">
+
+    <!-- قسم الكتب -->
+    <section>
+        <div class="section-banner banner-classic">
+            <h2 style="color: var(--classic-gold);">📜   الادببيات </h2>
+            <p>كتب برمجية، فلسفية، وأدلة تقنية حصرية.</p>
+        </div>
+
+        <div class="cards-grid">
+            {% for book in books %}
+            {% set target_url =
+                book.download_url
+                if book.download_url
+                else 'https://wa.me/966542980920?text=طلب كتاب: ' ~ book.title
+            %}
+            <div class="nebula-card">
+
+                <span class="category-tag">كتاب</span>
+
+                <img
+                    src="{{ url_for('static', filename=book.image_url or 'uploads/default.jpg') }}"
+                    alt="{{ book.title }}">
+
+                 <h3>{{ book.title }}</h3>
+                 <p>{{ book.description }}</p>
+                
+
+                <p class="price-text gold-text">
+                    {{ 'مجاني' if book.price == 0 else book.price ~ ' ر.س' }}
+                </p>
+
+                <div class="action-area">
+                    <a href="{{ target_url }}"
+                       class="btn-nebula {% if book.download_url %}btn-free{% else %}btn-wa{% endif %}"
+                       target="_blank">
+                        {% if book.download_url %}
+                            الانتقال إلى الكتاب
+                        {% else %}
+                            طلب عبر واتساب
+                        {% endif %}
+                    </a>
+
+                    <a href="{{ target_url }}"
+                       class="btn-nebula btn-share"
+                       target="_blank">🔗</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- قسم الأدوات التقنية -->
+    <section>
+        <div class="section-banner banner-tech">
+            <h2 style="color: var(--tech-cyan);">التقنية</h2>
+            <p>قوالب، سكربتات، وأدوات أتمتة مجانية ومدفوعة. كورسات</p>
+        </div>
+
+        <div class="cards-grid">
+            {% for tool in tech_tools %}
+            {% set target_url =
+                tool.download_url
+                if tool.download_url
+                else 'https://wa.me/966542980920?text=طلب أداة: ' ~ tool.title
+            %}
+            <div class="nebula-card">
+
+                <span class="category-tag">أداة</span>
+
+                <img
+                    src="{{ url_for('static', filename=tool.image_url or 'uploads/default.jpg') }}"
+                    alt="{{ tool.title }}">
+
+                <h3>{{ tool.title }}</h3>
+                <p>{{ tool.description }}</p>
+
+                <p class="price-text cyan-text">
+                    {{ 'مجاني' if tool.price == 0 else tool.price ~ ' ر.س' }}
+                </p>
+
+                <div class="action-area">
+                    <a href="{{ target_url }}"
+                       class="btn-nebula {% if tool.download_url %}btn-free{% else %}btn-wa{% endif %}"
+                       target="_blank">
+                        {% if tool.download_url %}
+                            الانتقال إلى الأداة
+                        {% else %}
+                            طلب عبر واتساب
+                        {% endif %}
+                    </a>
+
+                    <a href="{{ target_url }}"
+                       class="btn-nebula btn-share"
+                       target="_blank">🔗</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>

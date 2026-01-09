@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فشل التحقق</title>
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+<style>/* * Sadeem Network - Verification Failure Page Specific Styles
+ * Focuses on error communication and clear support access.
+ */
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--color-bg);
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Error Container */
+.container {
+    background-color: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 3rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border-top: 5px solid #d85c5c; /* Error red */
+    margin-bottom: 2rem;
+}
+
+h1 {
+    color: #d85c5c;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+}
+
+p {
+    color: var(--color-secondary);
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Support Section */
+.support {
+    background-color: var(--color-primary);
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    border-radius: var(--radius);
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.support h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1.2rem;
+    opacity: 0.9;
+}
+
+/* Telegram Button Styling */
+.support button {
+    background-color: #0088cc; /* Telegram Blue */
+    border: none;
+    padding: 0;
+    border-radius: 50px;
+    width: 100%;
+    transition: var(--transition);
+}
+
+.support button a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.support button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 136, 204, 0.4);
+    filter: brightness(1.1);
+}
+
+/* Icon / Graphic for Error (Optional Placeholder) */
+.container::before {
+    content: '⚠️';
+    display: block;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .container, .support {
+        padding: 2rem 1.5rem;
+        max-width: 100%;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+}
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>فشل التحقق</h1>
+        <p>نأسف! حدث خطأ أثناء محاولة التحقق من بريدك الإلكتروني.<br>
+           يرجى المحاولة مرة أخرى أو التواصل مع الدعم الفني.</p>
+    </div>
+
+    <div class="support">
+        <h2>الدعم الفني</h2>
+        <button>
+            <a href="https://t.me/THE_SALAH_1" target="_blank">الاتصال عبر تيليجرام</a>
+        </button>
+    </div>
+
+</body>
+</html>

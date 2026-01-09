@@ -1,0 +1,285 @@
+/*
+ * شبكة سديم - Sadeem Network
+ * Professional RTL CSS Framework
+ * High-End, Service-Oriented, Literary Aesthetic
+ */
+
+:root {
+  /* Color Palette */
+  --color-deep: #190019;
+  --color-primary: #3f2068;
+  --color-secondary: #5d2664;
+  --color-accent: #854F6C;
+  --color-light: #DFB6B2;
+  --color-bg: #FBE4D8;
+
+  /* Typography */
+  --font-family: 'Cairo', 'Tajawal', system-ui, -apple-system, sans-serif;
+  --line-height: 1.6;
+
+  /* Spacing & Borders */
+  --radius: 12px;
+  --shadow: 0 4px 20px rgba(25, 0, 25, 0.08);
+  --transition: all 0.3s ease;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  direction: rtl;
+  unicode-bidi: embed;
+  background-color: var(--color-bg);
+  color: var(--color-deep);
+  font-family: var(--font-family);
+  line-height: var(--line-height);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-primary);
+  margin-block-end: 1rem;
+  font-weight: 700;
+}
+
+p {
+  margin-block-end: 1.5rem;
+  max-width: 75ch;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-accent);
+  transition: var(--transition);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Layout Containers */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+/* Header & Navbar */
+.header {
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  padding-block: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-bg);
+}
+
+.nav-links {
+  display: none; /* Hidden on mobile by default */
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: var(--color-light);
+  font-size: 1rem;
+}
+
+.nav-links a:hover {
+  color: var(--color-bg);
+}
+
+/* Hero Section */
+.hero {
+  padding-block: 4rem;
+  text-align: center;
+  background-color: var(--color-primary);
+  color: var(--color-bg);
+  clip-path: ellipse(150% 100% at 50% 0%);
+}
+
+.hero h1 {
+  color: var(--color-bg);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.hero p {
+  margin-inline: auto;
+  color: var(--color-light);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 2rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  font-family: var(--font-family);
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+/* Service Cards */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding-block: 4rem;
+}
+
+.card {
+  background-color: var(--color-secondary);
+  color: var(--color-bg);
+  padding: 2rem;
+  border-radius: var(--radius);
+  transition: var(--transition);
+  border: 1px solid rgba(223, 182, 178, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 30px rgba(25, 0, 25, 0.2);
+}
+
+.card h3 {
+  color: var(--color-light);
+}
+
+/* Forms */
+.form-group {
+  margin-block-end: 1.5rem;
+}
+
+.label {
+  display: block;
+  margin-block-end: 0.5rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  border: 2px solid var(--color-light);
+  background-color: white;
+  font-family: var(--font-family);
+  transition: var(--transition);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(133, 79, 108, 0.1);
+}
+
+/* Footer */
+.footer {
+  background-color: var(--color-deep);
+  color: var(--color-light);
+  padding-block: 4rem 2rem;
+  margin-block-start: 4rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 3rem;
+  margin-block-end: 3rem;
+}
+
+.footer-brand {
+  color: var(--color-bg);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.copyright {
+  text-align: center;
+  padding-block-start: 2rem;
+  border-block-start: 1px solid var(--color-secondary);
+  font-size: 0.9rem;
+}
+
+/* Accessibility & Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .nav-links {
+    display: flex;
+  }
+
+  .hero {
+    padding-block: 8rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .nav {
+    flex-direction: row-reverse; /* Flip for RTL burger placement if needed */
+  }
+  
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+}
+
+/* Focus States for Accessibility */
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
+}

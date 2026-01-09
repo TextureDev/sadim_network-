@@ -1,0 +1,194 @@
+/* * Sadeem Network - Registration Page Specific Styles
+ * Maintain consistent literary dark aesthetic while handling multi-field forms.
+ */
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  background-color: var(--color-bg);
+}
+
+.container {
+  background-color: white;
+  width: 100%;
+  max-width: 500px;
+  padding: 2.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--color-light);
+}
+
+/* Logo & Header Section */
+.logo-section {
+  text-align: center;
+  margin-block-end: 2rem;
+}
+
+.logo-text {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-block-end: 0.5rem;
+}
+
+.logo-subtitle {
+  color: var(--color-accent);
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.clock {
+  font-size: 0.85rem;
+  color: var(--color-secondary);
+  background-color: var(--color-bg);
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  display: inline-block;
+  margin-block-start: 0.8rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  text-align: center;
+  color: var(--color-primary);
+  margin-block-end: 2rem;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 2px;
+  background: var(--color-accent);
+  margin: 0.5rem auto 0;
+}
+
+/* Form Styling */
+.mb-3 {
+  margin-block-end: 1.2rem;
+  text-align: right;
+}
+
+.form-label {
+  display: block;
+  margin-block-end: 0.5rem;
+  font-weight: 600;
+  color: var(--color-deep);
+  font-size: 0.95rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius);
+  border: 2px solid var(--color-light);
+  background-color: #fff;
+  font-family: var(--font-family);
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(133, 79, 108, 0.1);
+}
+
+/* Animated Button */
+.btn-animated {
+  background-color: var(--color-primary);
+  color: white;
+  padding: 1rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin-block-start: 1rem;
+}
+
+.btn-animated:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(43, 18, 76, 0.3);
+}
+
+.btn-animated:active {
+  transform: translateY(0);
+}
+
+/* Error Message */
+.error-message {
+  background-color: #fff1f0;
+  color: #d85c5c;
+  padding: 0.8rem;
+  border-radius: var(--radius);
+  border-right: 4px solid #d85c5c;
+  margin-block-end: 1.5rem;
+  font-size: 0.9rem;
+  text-align: right;
+  display: none;
+}
+
+/* Divider & Navigation Link */
+.divider {
+  margin-block: 2rem;
+  position: relative;
+  border-top: 1px solid var(--color-light);
+}
+
+.divider span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding-inline: 1rem;
+  color: var(--color-secondary);
+  font-size: 0.9rem;
+}
+
+.text-center {
+  text-align: center;
+  color: var(--color-secondary);
+  font-size: 0.95rem;
+}
+
+.text-center a {
+  color: var(--color-accent);
+  font-weight: 700;
+  text-decoration: none;
+  margin-inline-start: 0.3rem;
+}
+
+.text-center a:hover {
+  text-decoration: underline;
+}
+
+/* Utilities */
+.w-100 {
+  width: 100%;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+  .container {
+    padding: 1.5rem;
+    box-shadow: none;
+    border: none;
+    background-color: transparent;
+  }
+  
+  body {
+    background-color: white;
+    align-items: flex-start;
+  }
+
+  .logo-text {
+    font-size: 1.7rem;
+  }
+}

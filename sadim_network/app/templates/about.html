@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من نحن - شبكة سديم</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+    
+
+</head>
+<body>
+    <header>
+        <div class="logo">SADEEM NETWORK</div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.index') }}">الرئيسية</a></li>
+                <li><a href="{{ url_for('admin.show_services') }}">خدماتنا</a></li>
+                <li><a href="##">اتصل بنا</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-image"></div>
+        <h1>خلف أستار السديم</h1>
+        <p>سديم ليست مجرد شبكة، بل كيان رقمي يجمع بين المعرفة، الإبداع، والفرص التقنية في فضاء واحد.</p>
+    </section>
+    
+
+
+    <div class="content">
+        <div class="section-box">
+            <h2>رؤيتنا المستقبيلة</h2>
+            <p>
+                نسعى لأن يكون سديم المعيار الأول في الخدمات الرقمية والإبداعية بالمنطقة. 
+                نحن نؤمن بأن كل فكرة هي ذرة في هذا الكون تستحق أن تنفجر إبداعاً وتتحول إلى واقع ملموس.
+            </p>
+        </div>
+
+        <div class="section-box">
+            <h2>مهمتنا</h2>
+            <p>
+                بناء شبكة متكاملة تربط بين المشاريع، الأفراد، والفرص. نحن هنا لدمج التكنولوجيا بالفلسفة، 
+                والبرمجة بالأدب، لنخلق تجربة مستخدم لا تُنسى تتجاوز مجرد تقديم الخدمة إلى بناء علاقة مستدامة.
+            </p>
+        </div>
+
+<h2 style="text-align: center; margin-bottom: 2rem;">منظومة شبكة سديم</h2>
+
+<div class="team-images">
+
+<a href="https://t.me/addlist/lSjtWMNZFuI3Mzdk" target="_blank" class="team-card folder">
+    <img src="{{ url_for('static', filename='images/logo.png') }}">
+    <div class="card-icon">📚</div>
+    <p>مجلد شبكة سديم<br><small>كل القنوات في مكان واحد</small></p>
+</a>
+
+<a href="https://t.me/SADIM_NETWORK" target="_blank" class="team-card channel">
+    <img src="{{ url_for('static', filename='images/logo.png') }}">
+    <div class="card-icon">💡</div>
+    <p>قناة شبكة سديم<br><small>المركز الإعلامي</small></p>
+</a>
+
+<a href="https://t.me/SADIM_OS" target="_blank" class="team-card group">
+    <img src="{{ url_for('static', filename='images/logo.png') }}">
+    <div class="card-icon">💬</div>
+    <p>أرشيف شبكة سديم<br><small>نقاش وتوثيق</small></p>
+</a>
+
+</div>
+
+
+        <h2 style="text-align: center; margin-top: 5rem; margin-bottom: 2rem;">قيم سديم الأساسية</h2>
+        <ul class="values-grid">
+            <li><strong>الإبداع</strong> نخلق حلولاً خارج الصندوق.</li>
+            <li><strong>الشفافية</strong> الوضوح هو لغتنا الأولى مع العميل.</li>
+            <li><strong>الالتزام</strong> جودة العمل هي بصمتنا الدائمة.</li>
+            <li><strong>الجرأة</strong> لا نهاب تحدي الأفكار التقليدية.</li>
+        </ul>
+    </div>
+
+    <footer>
+            
+        <h2 style="color: var(--color-light)">شبكة سديم</h2>
+        <p style="opacity: 0.6; margin-top: 1rem;">بابك الأول للخدمات الرقمية المتكاملة</p>
+        
+      <div class="social-links">
+          <a href="https://www.tiktok.com/@sadim_networks" target="_blank">
+              <i class="fab fa-tiktok"></i>
+          </a>
+      
+          <a href="https://www.snapchat.com/add/kyybs21" target="_blank">
+              <i class="fab fa-snapchat-ghost"></i>
+          </a>
+      
+          <a href="https://www.instagram.com/sadem_network" target="_blank">
+              <i class="fab fa-instagram"></i>
+          </a>
+      
+      
+          <a href="https://wa.me/966542980920?text=Hello" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+          </a>
+<a href="https://mail.google.com/mail/?view=cm&to=moslah20040@gmail.com" target="_blank">
+    <i class="fas fa-envelope"></i>
+</a>
+      </div>
+
+        
+        <p style="font-size: 0.8rem; opacity: 0.4;">© 2026 جميع الحقوق محفوظة لشبكة سديم | SADIM NETWORK</p>
+    </footer>
+</body>
+</html>

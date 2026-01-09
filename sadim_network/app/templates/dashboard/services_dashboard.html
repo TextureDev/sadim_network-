@@ -1,0 +1,250 @@
+<!--ثراء\backend\templates\dashboard\services_dashboard.html-->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+
+  <title>لوحة الخدمات - ثراء</title>
+,<style>/* * Sadeem Network - Admin Dashboard Specific Styles
+ * Focuses on control management, data clarity, and functional actions.
+ */
+
+body {
+    padding: 2rem;
+    background-color: var(--color-bg);
+}
+
+h1 {
+    text-align: center;
+    color: var(--color-primary);
+    margin-block-end: 2rem;
+    font-size: 2rem;
+    border-bottom: 2px solid var(--color-light);
+    display: inline-block;
+    width: 100%;
+    padding-bottom: 1rem;
+}
+
+/* Header & Greeting */
+.header {
+    background-color: var(--color-primary);
+    color: var(--color-bg);
+    padding: 1rem 2rem;
+    border-radius: var(--radius);
+    margin-block-end: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.greeting {
+    list-style: none;
+    font-size: 0.9rem;
+    color: var(--color-light);
+}
+
+/* Control Navigation */
+.add-btn {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-block-end: 3rem;
+}
+
+.add-btn a {
+    padding: 0.7rem 1.5rem;
+    background-color: white;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius);
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.add-btn a:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.add-btn a.logout {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+.add-btn a.logout:hover {
+    background-color: var(--color-accent);
+    color: white;
+}
+
+/* Services Management Grid */
+.services-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.service-card {
+    background-color: white;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--color-light);
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    border-color: var(--color-accent);
+    transform: scale(1.01);
+}
+
+.service-card img {
+    border-radius: 8px;
+    object-fit: cover;
+    background-color: var(--color-bg);
+}
+
+.service-info {
+    flex-grow: 1;
+}
+
+.service-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+    color: var(--color-primary);
+}
+
+.service-info p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-secondary);
+    line-height: 1.4;
+}
+
+/* Admin Actions */
+.service-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.service-actions a {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 6px;
+    transition: var(--transition);
+}
+
+.service-actions a:first-child {
+    background-color: var(--color-light);
+    color: var(--color-primary);
+}
+
+.service-actions a:first-child:hover {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.service-actions a:last-child {
+    background-color: #fff1f0;
+    color: #d85c5c;
+}
+
+.service-actions a:last-child:hover {
+    background-color: #d85c5c;
+    color: white;
+}
+
+/* Empty State */
+.services-dashboard > p {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: var(--radius);
+    color: var(--color-secondary);
+    border: 2px dashed var(--color-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .service-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .service-actions {
+        flex-direction: row;
+        width: 100%;
+    }
+    
+    .service-actions a {
+        flex: 1;
+    }
+
+    .add-btn {
+        flex-direction: column;
+    }
+}</style>
+</head>
+<body>
+  <div class="header">
+
+    <div class="nav-buttons">
+      <li class="greeting">{{ greeting }} {{ username }} — الوقت الحالي: {{ current_time }}</li>
+
+    </div>
+  </div>
+  <h1>لوحة الادمن</h1>
+
+  <p class="add-btn">
+    <a class="btn" href="{{ url_for('admin.add_service') }}">إضافة خدمة جديدة</a>
+    <a class="btn logout" href="{{ url_for('admin.show_services') }}">عرض الخدمات</a>
+    <a href="{{ url_for('admin.dashboard_home') }}">  لوحة الزوار</a>
+    <a href="{{ url_for('admin.dashboard_users') }}">لوحة المستخدمين</a>
+
+
+  </p>
+
+  <div class="services-dashboard">
+    {% if services %}
+      {% for s in services %}
+        <div class="service-card">
+           <!-- استخدام المتغير الصحيح s -->
+            <img src="{{ url_for('static', filename=s.image_url or 'uploads/default.jpg') }}" width="120" alt="صورة الخدمة">
+           
+           <div class="service-info">
+             <h3>{{ s.title }}</h3>
+             {% if s.description %}
+               <p>{{ s.description }}</p>
+             {% endif %}
+             {% if s.price %}
+               <p>السعر: {{ s.price }} ريال</p>
+             {% endif %}
+             {% if s.delivery_time %}
+               <p>مدة التسليم: {{ s.delivery_time }} يوم</p>
+             {% endif %}
+           </div>
+
+           <div class="service-actions">
+             <a href="{{ url_for('admin.edit_service', service_id=s.id) }}">تعديل</a>
+             <a href="{{ url_for('admin.delete_service', service_id=s.id) }}" onclick="return confirm('هل تريد حذف هذه الخدمة؟')">حذف</a>
+           </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>لا توجد خدمات بعد.</p>
+    {% endif %}
+  </div>
+</body>
+
+</html>

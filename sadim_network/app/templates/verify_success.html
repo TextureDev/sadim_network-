@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>تم التحقق</title>
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+<style>/* * Sadeem Network - Verification Success Page Specific Styles
+ * Focuses on positive feedback and clear call-to-action.
+ */
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: var(--color-bg);
+    padding: 2rem;
+    text-align: center;
+}
+
+/* Success Container */
+.container {
+    background-color: white;
+    width: 100%;
+    max-width: 550px;
+    padding: 4rem 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border-bottom: 6px solid #25D366; /* Success Green */
+    animation: slideUp 0.6s ease-out;
+}
+
+/* Success Icon/Graphic */
+.container::before {
+    content: '✓';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background-color: rgba(37, 211, 102, 0.1);
+    color: #25D366;
+    font-size: 3rem;
+    font-weight: bold;
+    border-radius: 50%;
+    margin: 0 auto 2rem;
+    border: 3px solid #25D366;
+}
+
+h1 {
+    color: var(--color-primary);
+    font-size: 2rem;
+    margin-block-end: 1rem;
+    font-weight: 800;
+}
+
+p {
+    color: var(--color-secondary);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-block-end: 2.5rem;
+}
+
+/* Success Button */
+.button {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(43, 18, 76, 0.2);
+}
+
+.button:hover {
+    background-color: var(--color-secondary);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(43, 18, 76, 0.3);
+}
+
+/* Simple Entrance Animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 3rem 1.5rem;
+        border: none;
+        box-shadow: none;
+        background-color: transparent;
+    }
+    
+    body {
+        background-color: white;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+}
+</style>
+
+</head>
+
+<body>
+  <div class="container">
+    <h1>تم التحقق من بريدك الإلكتروني</h1>
+    <p>شكرًا لك! تم تفعيل حسابك بنجاح، ويمكنك الآن تسجيل الدخول.</p>
+    <a href="{{ url_for('loading_bp.login') }}" class="button">العودة لتسجيل الدخول</a>
+
+  </div>
+</body>
+</html>

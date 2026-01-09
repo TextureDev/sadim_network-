@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شبكة سديم للخدمات الرقمية</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lading.css') }}">
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+<header class="header">
+        <nav class="navbar">
+            <div class="logo-container">
+                <a href="#" class="logo">شبكة سديم</a>
+            </div>
+
+            <ul class="nav-menu">
+                <li class="greeting-text">{{ username }}</li>
+                <li><a href="{{ url_for('loading_bp.account') }}">حسابي</a></li>
+                <li><a href="{{ url_for('admin.show_services') }}">خدماتنا</a></li>
+                <li><a href="{{ url_for('main.about') }}">من نحن</a></li>
+                <li><a href="mailto:thazraa2019@gmail.com" class="btn-primary">اتصل بنا</a></li>
+                <li><a href="{{ url_for('loading_bp.logout') }}" class="btn-logout">خروج</a></li>
+            </ul>
+
+            <button id="menu-toggle"><i class="fas fa-bars"></i></button>
+        </nav>
+    </header>
+
+    <div id="mobile-sidebar" class="mobile-sidebar">
+        <button id="close-sidebar">×</button>
+        <ul class="mobile-nav-links">
+            <li><a href="{{ url_for('loading_bp.account') }}">حسابي</a></li>
+            <li><a href="{{ url_for('admin.show_services') }}">خدماتنا</a></li>
+            <li><a href="{{ url_for('main.about') }}">من نحن</a></li>
+            <li><a href="mailto:thazraa2019@gmail.com">اتصل بنا</a></li>
+            <li><a href="{{ url_for('loading_bp.logout') }}" style="color: #ff7675;">تسجيل الخروج</a></li>
+        </ul>
+    </div>
+
+    <section class="hero">
+        <h1 class="hero-title">حيث تبدأ الفكرة<br><span style="color: var(--color-accent)">وتجد طريقها</span></h1>
+        <p class="hero-subtitle">في شبكة سديم، لا نطارد كل فكرة، بل نختار ما يستحق أن يُبنى. نحن نحول الاحتمال المبهم إلى مسار واضح ونتيجة قابلة للنمو.</p>
+        
+        <div class="hero-images-grid">
+            <img src="{{ url_for('static', filename='images/5976816295606946886_121.jpg') }}" alt="1">
+            <img src="{{ url_for('static', filename='images/5976816295606946887_121.jpg') }}" alt="2">
+            <img src="{{ url_for('static', filename='images/5976816295606946888_120.jpg') }}" alt="3">
+            <img src="{{ url_for('static', filename='images/5976816295606946889_121.jpg') }}" alt="4">
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="corner-logo">
+            <h2 class="corner-main">قيمنا الجوهرية</h2>
+            <p>المبادئ التي تحرك مجرة سديم الرقمية</p>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <span class="feature-number">01</span>
+                <h3>الإبداع</h3>
+                <p>لا نكرر ما هو موجود، بل نبحث عمّا لم يُبنَ بعد في فضاء الابتكار.</p>
+            </div>
+            <div class="feature">
+                <span class="feature-number">02</span>
+                <h3>الشفافية</h3>
+                <p>نؤمن أن الوضوح أساس الثقة، وأن الثقة بداية كل علاقة مستمرة.</p>
+            </div>
+            <div class="feature">
+                <span class="feature-number">03</span>
+                <h3>الجرأة</h3>
+                <p>الأفكار العادية لا تصنع أثرًا، والجرأة هي طريق الاختلاف الحقيقي.</p>
+            </div>
+            <div class="feature">
+                <span class="feature-number">04</span>
+                <h3>الالتزام</h3>
+                <p>ما نعد به نلتزم بتنفيذه، فالالتزام قاعدة لا خيار فيها.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="heritage-section">
+        <div class="heritage-text">
+            <h2>"رؤيتنا أن نكون كيانًا رقميًا مستقلًا، يُبنى بعقلية طويلة المدى، ويترك أثرًا يبقى."</h2>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="corner-logo" style="border-color: var(--color-light)">
+            <h2 class="corner-main">لماذا سديم؟</h2>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <h3>القيمة تُبنى</h3>
+                <p>نؤمن أن النتائج الحقيقية تُصنع بخطوات واضحة، لا بوعود سريعة.</p>
+            </div>
+            <div class="feature">
+                <h3>حضور بوعي</h3>
+                <p>في عالم مزدحم، نصنع حضورك الرقمي بشكل يعبر عنك ولا يشبه غيرك.</p>
+            </div>
+            <div class="feature">
+                <h3>البداية قرار</h3>
+                <p>نحول الخطط الورقية إلى مسارات حية ومشاريع قابلة للتنفيذ.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <h2 style="color: var(--color-light)">شبكة سديم</h2>
+        <p style="opacity: 0.6; margin-top: 1rem;">بابك الأول للخدمات الرقمية المتكاملة</p>
+        
+      <div class="social-links">
+          <a href="https://www.tiktok.com/@sadim_networks" target="_blank">
+              <i class="fab fa-tiktok"></i>
+          </a>
+
+          <a href="https://www.snapchat.com/add/kyybs21" target="_blank">
+              <i class="fab fa-snapchat-ghost"></i>
+          </a>
+      
+          <a href="https://www.instagram.com/sadem_network" target="_blank">
+              <i class="fab fa-instagram"></i>
+          </a>
+
+      
+          <a href="https://wa.me/966542980920?text=Hello" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+          </a>
+      
+<a href="https://mail.google.com/mail/?view=cm&to=moslah20040@gmail.com" target="_blank">
+    <i class="fas fa-envelope"></i>
+</a>
+      </div>
+
+        
+        <p style="font-size: 0.8rem; opacity: 0.4;">صنع بكل حب &copy; SADEM_NETWORK® 2026</p>
+    </footer>
+<script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileSidebar = document.getElementById('mobile-sidebar');
+        const closeSidebar = document.getElementById('close-sidebar');
+
+        // إنشاء الغطاء الشفاف برمجياً
+        const overlay = document.createElement('div');
+        overlay.className = 'overlay';
+        document.body.appendChild(overlay);
+
+        // وظيفة فتح القائمة
+        menuToggle.addEventListener('click', () => {
+            mobileSidebar.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        // وظيفة إغلاق القائمة
+        const hideSidebar = () => {
+            mobileSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        };
+
+        closeSidebar.addEventListener('click', hideSidebar);
+        overlay.addEventListener('click', hideSidebar);
+    </script>
+</body>
+</html>

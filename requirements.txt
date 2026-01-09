@@ -1,0 +1,23 @@
+# Core Framework
+Flask==3.1.2
+Werkzeug==3.1.4
+
+# Database
+psycopg2==2.9.11
+
+# Caching & Sessions
+redis==7.1.0
+
+# Security & Authentication
+Flask-Login==0.6.3
+Flask-Limiter==4.1.1
+
+# Environment Variables
+python-dotenv==1.2.1
+
+# Production Server
+gunicorn==23.0.0
+gevent==24.11.1
+
+# Utilities
+pytz==2025.2

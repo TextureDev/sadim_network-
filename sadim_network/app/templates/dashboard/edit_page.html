@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>تحرير الصفحة - ثراء</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+<style>/* * Sadeem Network - CMS Page Creator Specific Styles
+ * Focuses on content management and color configuration inputs.
+ */
+
+body {
+    background-color: var(--color-bg);
+    padding-block: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: var(--color-primary);
+    margin-block-end: 2rem;
+    font-size: 2.2rem;
+    text-align: center;
+}
+
+/* Form Container */
+.form {
+    background-color: white;
+    width: 100%;
+    max-width: 750px;
+    padding: 2.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--color-light);
+}
+
+.form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Label & Layout */
+.form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: var(--color-deep);
+    font-size: 0.95rem;
+    text-align: right;
+}
+
+/* Inputs, Selects, and Textareas */
+.form input[type="text"],
+.form textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: var(--radius);
+    border: 2px solid var(--color-light);
+    background-color: #fafafa;
+    font-family: var(--font-family);
+    transition: var(--transition);
+    direction: ltr; /* Slugs and Colors usually LTR */
+}
+
+/* Title and Content should remain RTL */
+.form input[name="title"],
+.form textarea[name="content"] {
+    direction: rtl;
+}
+
+.form input:focus,
+.form textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    background-color: white;
+}
+
+/* Textarea height for HTML content */
+.form textarea {
+    min-height: 250px;
+    font-family: 'Courier New', Courier, monospace; /* Coding feel for HTML */
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+/* Specialized Inputs (Colors & Files) */
+.form input[name="bg_color"],
+.form input[name="text_color"] {
+    max-width: 200px;
+    text-transform: uppercase;
+}
+
+.form input[type="file"] {
+    padding: 0.5rem;
+    background-color: var(--color-bg);
+    border: 2px dashed var(--color-light);
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+/* Button Group */
+.form .btn {
+    padding: 1rem 2rem;
+    border-radius: var(--radius);
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button.btn[type="submit"] {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+button.btn[type="submit"]:hover {
+    background-color: var(--color-secondary);
+    transform: translateY(-2px);
+}
+
+a.btn {
+    background-color: var(--color-light);
+    color: var(--color-primary);
+}
+
+a.btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .form {
+        padding: 1.5rem;
+        width: 92%;
+        box-shadow: none;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+}</style>
+</head>
+<body>
+  <h1>{% if page %}تعديل الصفحة{% else %}إنشاء صفحة جديدة{% endif %}</h1>
+  <div class="form">
+    <form method="post" enctype="multipart/form-data">
+      <label>عنوان الصفحة <input type="text" name="title" value="{{ page.title if page }}" required></label>
+      <label>slug (معرف الرابط) <input type="text" name="slug" value="{{ page.slug if page }}" required></label>
+      <label>محتوى (HTML) <textarea name="content" rows="8">{{ page.content if page }}</textarea></label>
+
+      <label>لون الخلفية <input type="text" name="bg_color" value="{{ page.bg_color if page else '#ffffff' }}" placeholder="#ffffff" required></label>
+      <label>لون النص <input type="text" name="text_color" value="{{ page.text_color if page else '#000000' }}" placeholder="#000000" required></label>
+
+      <label>صورة رئيسية <input type="file" name="image"></label>
+
+      <button class="btn" type="submit">حفظ</button>
+      <a class="btn" href="/dashboard">إلغاء</a>
+    </form>
+  </div>
+</body>
+</html>

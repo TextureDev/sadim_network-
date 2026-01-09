@@ -1,0 +1,362 @@
+        :root {
+            --nebula-dark: #1a1a2e;
+            --nebula-purple: #2b124c;
+            --nebula-accent: #854f6c;
+            --nebula-gold: #dfb6b2;
+            --text-light: #f5f1eb;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.8; 
+            color: var(--text-light); 
+            margin: 0; 
+            padding: 0; 
+            background-color: var(--nebula-dark);
+        }
+
+        /* Header Styling */
+        header { 
+            background: var(--nebula-purple); 
+            color: var(--nebula-gold); 
+            padding: 1rem 5%; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--nebula-accent);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .logo { font-size: 1.6rem; font-weight: 900; letter-spacing: 1px; }
+
+        nav ul { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; }
+        nav ul li a { 
+            color: var(--text-light); 
+            text-decoration: none; 
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        nav ul li a:hover { color: var(--nebula-gold); }
+
+        /* Hero Section */
+        .hero { 
+            background: linear-gradient(135deg, #2b124c 0%, #1a1a2e 100%);
+            padding: 5rem 1rem; 
+            text-align: center; 
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero h1 { font-size: 3rem; color: var(--nebula-gold); margin-bottom: 1rem; }
+        .hero p { max-width: 700px; margin: 0 auto; font-size: 1.2rem; opacity: 0.9; }
+
+        .hero img { 
+            max-width: 800px; 
+            width: 90%;
+            height: auto; 
+            margin-top: 3rem; 
+            border-radius: 20px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(223, 182, 178, 0.2);
+        }
+
+        /* Content Sections */
+        .content { max-width: 1000px; margin: 4rem auto; padding: 0 2rem; }
+        
+        .section-box {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            border-right: 5px solid var(--nebula-accent);
+            transition: 0.3s;
+        }
+        
+        .section-box:hover { background: rgba(255, 255, 255, 0.05); }
+
+        h2 { color: var(--nebula-gold); font-size: 1.8rem; margin-top: 0; }
+
+        /* Team Images */
+        .team-images { 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem; 
+        }
+        
+        .team-card {
+            text-align: center;
+            background: var(--nebula-purple);
+            padding: 1rem;
+            border-radius: 15px;
+            border: 1px solid rgba(223, 182, 178, 0.1);
+        }
+
+        .team-card img { 
+            width: 100%; 
+            border-radius: 10px; 
+            filter: grayscale(40%);
+            transition: 0.4s;
+        }
+        
+        .team-card:hover img { filter: grayscale(0%); transform: scale(1.03); }
+
+        /* Values List */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .values-grid li {
+            background: var(--nebula-purple);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border-bottom: 3px solid var(--nebula-gold);
+        }
+
+        .values-grid li strong { color: var(--nebula-gold); display: block; margin-bottom: 0.5rem; }
+
+        footer { 
+            background: #0f0f1a; 
+            color: var(--nebula-gold); 
+            text-align: center; 
+            padding: 2rem; 
+            border-top: 1px solid var(--nebula-purple);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 1rem; }
+            .hero h1 { font-size: 2rem; }
+        }
+.team-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* الكرت */
+.team-card {
+    position: relative;
+    padding: 1.2rem;
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    text-decoration: none;
+    color: #fff;
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* توهج سديمي */
+.team-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at top left,
+        rgba(124, 58, 237, 0.35),
+        transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.team-card:hover::before {
+    opacity: 1;
+}
+
+.team-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(124, 58, 237, 0.35);
+}
+
+/* الصورة */
+.team-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-bottom: 1rem;
+    filter: brightness(0.85);
+}
+
+/* النص */
+.team-card p {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.team-card small {
+    font-size: 0.85rem;
+    opacity: 0.7;
+}
+
+/* تمييز ذكي لكل نوع */
+.team-card:nth-child(1) {
+    border: 1px solid rgba(34,197,94,0.35);
+}
+.team-card:nth-child(2) {
+    border: 1px solid rgba(59,130,246,0.35);
+}
+.team-card:nth-child(3) {
+    border: 1px solid rgba(168,85,247,0.35);
+}
+.team-card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* الصورة تصبح خلفية هادئة */
+.team-card img {
+    filter: brightness(0.45) blur(1px);
+}
+
+/* الأيقونة */
+.card-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -60%);
+    font-size: 3.2rem;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    padding: 18px 22px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* حركة فخمة */
+.team-card:hover .card-icon {
+    transform: translate(-50%, -70%) scale(1.1);
+}
+
+/* تمييز لوني ناعم */
+.folder .card-icon { border: 1px solid rgba(34,197,94,0.5); }
+.channel .card-icon { border: 1px solid rgba(59,130,246,0.5); }
+.group .card-icon { border: 1px solid rgba(168,85,247,0.5); }
+
+footer {
+    background: #0f0f1a;
+    color: var(--nebula-gold);
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--nebula-purple);
+    font-size: 0.9rem;
+}
+.social-links {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.social-links a {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+
+    color: var(--nebula-gold);
+    font-size: 1.4rem;
+
+    text-decoration: none;
+    border: 1px solid rgba(223, 182, 178, 0.15);
+
+    transition: 
+        transform 0.35s ease,
+        box-shadow 0.35s ease,
+        background 0.35s ease,
+        color 0.35s ease;
+}
+
+/* Hover عام */
+.social-links a:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* تلوين ذكي حسب المنصة */
+.social-links a:nth-child(1):hover { color: #ff0050; }   /* TikTok */
+.social-links a:nth-child(2):hover { color: #fffc00; }   /* Snapchat */
+.social-links a:nth-child(3):hover { color: #e1306c; }   /* Instagram */
+.social-links a:nth-child(4):hover { color: #1877f2; }   /* Facebook */
+.social-links a:nth-child(5):hover { color: #25d366; }   /* WhatsApp */
+.social-links a:nth-child(6):hover { color: #ffffff; }   /* Email */
+
+/* تأثير ضغط خفيف */
+.social-links a:active {
+    transform: scale(0.95);
+}
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 5rem 1rem;
+    position: relative;
+    color: var(--nebula-gold);
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+/* الصورة الخلفية */
+.hero-image {
+    width: 90%;
+    max-width: 800px;
+    height: 400px;
+    margin: 3rem auto 0;
+    border-radius: 20px;
+
+    /* الصورة مع overlay */
+    background-image: linear-gradient(rgba(43,18,76,0.5), rgba(26,26,46,0.5)), 
+        url("/static/images/photo-1451187580459-43490279c0fa.avif"); /* ضع مسار صورتك هنا */
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: normal;
+
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 1px solid rgba(223,182,178,0.2);
+}
+
+/* Responsive للجوال */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .hero-image {
+        width: 95%;
+        height: 250px;
+    }
+}
+

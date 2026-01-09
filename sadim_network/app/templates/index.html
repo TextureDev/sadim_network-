@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شبكة سديم - حلمك يبدأ هنا</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo-container">
+                <span style="color: var(--color-accent); font-size: 0.8rem; letter-spacing: 3px;">شبكة</span>
+                <div class="logo">سديم</div>
+            </div>
+
+            <ul class="nav-menu">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="{{url_for('admin.show_services')}}">خدماتنا</a></li>
+                <li><a href="mailto:thazraa2019@gmail.com">اتصل بنا</a></li>
+                <li><a href="{{url_for('main.about')}}">من نحن</a></li>
+
+            </ul>
+
+            <div class="nav-buttons">
+                <a href="{{ url_for('loading_bp.login') }}" class="btn-secondary">تسجيل دخول</a>
+                <a href="{{ url_for('register.register_user') }}" class="btn-primary">انضم إلينا</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">أهلاً بك في شبكة سديم </h1>
+            <p class="hero-subtitle">
+                هنا لا تنتهي الأفكار، بل تولد من جديد. سديم هو الكيان الرقمي الذي يدمج بين عمق المعرفة وجرأة التنفيذ، لنصنع معاً واقعاً يتجاوز التوقعات.
+            </p>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="corner-logo">
+            <h1 class="corner-main">سديم</h1>
+            <p style="color: var(--color-accent)">نظام بيئي متكامل</p>
+        </div>
+
+        <div class="service-content">
+            <div>
+                <h2 class="service-title">ما وراء المنصة</h2>
+                <p style="font-size: 1.4rem; margin-bottom: 1.5rem;">نحن لا نبني مواقع، نحن نصنع تجارب إنسانية رقمية.</p>
+                <p style="opacity: 0.7;">
+                    سديم يمثل التقاطع بين الفن والتقنية. نؤمن أن الأدوات الرقمية يجب أن تكون بسيطة كجمال النجوم ومعقدة كدقة السديم في تكوينه.
+                </p>
+            </div>
+            <div class="cta-section">
+                <div style="max-width: 60%;">
+                    <h3>استكشف عالمنا</h3>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">اكتشف كيف يمكن لسديم أن يغير مسار أفكارك الرقمية.</p>
+                </div>
+                <a href="{{ url_for('admin.show_services') }}" class="btn-primary" style="background: white; color: var(--color-primary);">اكتشف الآن</a>
+            </div>
+        </div>
+
+        <div class="heritage-section">
+            <div class="heritage-text">
+                <center>
+                    <h2>نصنع المعرفة • نلهم العقول • نبني المستقبل</h2>
+                </center>
+            </div>
+        </div>
+
+        <div class="why-choose-us">
+            <h2 style="font-size: 3rem; margin-bottom: 3rem;">لماذا تختار الإبحار معنا؟</h2>
+            <div class="features">
+                <div class="feature">
+                    <span class="feature-number">01</span>
+                    <h3>الفلسفة التقنية</h3>
+                    <p>نعمل بوعي تقني يركز على الجوهر لا المظهر فقط، لضمان استدامة نموك.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-number">02</span>
+                    <h3>الجمالية الوظيفية</h3>
+                    <p>تصميماتنا ليست للزينة، بل هي لغة حوار بينك وبين جمهورك المستهدف.</p>
+                </div>
+                <div class="feature">
+                    <span class="feature-number">03</span>
+                    <h3>الابتكار المستمر</h3>
+                    <p>في سديم، التحديث هو حالتنا الطبيعية. نحن ننمو مع كل فكرة جديدة تطرحها.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- Footer Links بعد الخدمات -->
+<section class="footer-links-section" style="padding: 2rem 1rem; background: #19061f;  text-align:left;">
+    <ul style="list-style:none; padding:0; display:flex; gap:2rem; flex-wrap:wrap; justify-content:flex-start;">
+        <li><a href="#home" style="text-decoration:none; color:#f0ebeb;">الرئيسية</a></li>
+        <li><a href="{{url_for('admin.show_services')}}" style="text-decoration:none; color:#f5f0f0;">خدماتنا</a></li>
+        <li><a href="mailto:thazraa2019@gmail.com" style="text-decoration:none; color:#f0e9e9;">اتصل بنا</a></li>
+        <li><a href="{{url_for('main.about')}}" style="text-decoration:none; color:#e6e3e3;">من نحن</a></li>
+        <li><a href="{{ url_for('register.register_user') }}" style="text-decoration:none; color:#efeaea;">انضم إلينا</a></li>
+        <li><a href="{{ url_for('loading_bp.login') }}" style="text-decoration:none; color:#f3eeee;">تسجيل دخول</a></li>
+    </ul>
+</section>
+
+    <footer>
+        <h2 style="color: var(--color-light)">شبكة سديم</h2>
+        <p style="opacity: 0.6; margin-top: 1rem;">بابك الأول للخدمات الرقمية المتكاملة</p>
+        
+      <div class="social-links">
+          <a href="https://www.tiktok.com/@sadim_networks" target="_blank">
+              <i class="fab fa-tiktok"></i>
+          </a>
+      
+          <a href="https://www.snapchat.com/add/kyybs21" target="_blank">
+              <i class="fab fa-snapchat-ghost"></i>
+          </a>
+      
+          <a href="https://www.instagram.com/sadem_network" target="_blank">
+              <i class="fab fa-instagram"></i>
+          </a>
+      
+
+      
+          <a href="https://wa.me/966542980920?text=Hello" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+          </a>
+      
+<a href="https://mail.google.com/mail/?view=cm&to=moslah20040@gmail.com" target="_blank">
+    <i class="fas fa-envelope"></i>
+</a>
+
+      </div>
+
+        
+        <p style="font-size: 0.8rem; opacity: 0.4;">صنع بكل حب &copy; SADEM_NETWORK® 2026</p>
+    </footer>
+</body>
+
+</html>

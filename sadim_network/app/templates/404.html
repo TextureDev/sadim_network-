@@ -1,0 +1,92 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+<style>
+    /* * Sadeem Network - 404 Error Page Specific Styles
+ * Theme: Lost in the Nebula
+ */
+
+body {
+    background-color: var(--color-bg); /* اللون الداكن الأساسي */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    text-align: center;
+    overflow: hidden;
+}
+
+.error-container {
+    max-width: 600px;
+    animation: fadeIn 1s ease-in;
+}
+
+/* تنسيق الشعار ليكون مركزياً ومميزاً */
+.error-logo {
+    width: 180px;
+    height: auto;
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 0 15px rgba(223, 182, 178, 0.3));
+    animation: float 4s ease-in-out infinite;
+}
+
+h1 {
+    color: var(--color-accent); /* اللون الأرجواني أو الوردي المترب */
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 900;
+}
+
+p {
+    color: var(--color-secondary);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+}
+
+/* زر العودة */
+.btn-home {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.btn-home:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 25px rgba(43, 18, 76, 0.4);
+}
+
+/* أنيميشن الطفو للشعار */
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* تأثير خلفية سديمية بسيطة (اختياري) */
+.nebula-bg-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(133, 79, 108, 0.1) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    filter: blur(50px);
+}
+</style>
+<h1>الصفحة غير موجودة</h1>
+<p>عذرًا، الصفحة التي تحاول الوصول إليها غير موجودة.</p>
+<p>يرجى التحقق من الرابط أو العودة إلى <a href="{{ url_for('main.index') }}">الصفحة الرئيسية</a>.</p>
