@@ -3,7 +3,7 @@ from models.user import User
 
 def create_admin():
     email = "saaadqutub@gmail.com"
-    password = "salah_2004_1234"  # كلمة المرور الأصلية
+    password = ""  # كلمة المرور الأصلية
     admin = User.get_by_email(email)
 
     if admin:
