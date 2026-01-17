@@ -7,6 +7,7 @@ class service:
     @staticmethod
     def add_service(image_url, name, category, description, title, type):
         """إضافة خدمة جديدة إلى قاعدة البيانات"""
+        
         conn = get_db_connection()
         cur = conn.cursor()
         cur.execute("""

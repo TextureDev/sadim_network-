@@ -1,13 +1,17 @@
+# ملف لادارة الموقع هذه نسخة متواضعة
+#_____  
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from werkzeug.utils import secure_filename
 import psycopg2.extras
 import pytz
+#_________
 from app.db.sadim_db import get_db_connection
 from utlis.login_required import login_required
 from utlis.permissions import admin_required
 from datetime import datetime
 import os
-
+from models.user import User
+from models.product import service
 
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/dashboard', template_folder='../../templates')
@@ -106,6 +110,7 @@ def add_service():
         cur.close()
         conn.close()
 
+        
         flash('✅ تمت إضافة الخدمة بنجاح!', 'success')
         return redirect(url_for('admin.add_service'))
 
@@ -277,7 +282,23 @@ def delete_visits():
 @admin_bp.route("/serverss")
 @login_required
 @admin_required
-def server():
+def services_dashboard():
+    username = session.get('username', 'ضيف')
+
+    # الوقت الحالي حسب منطقتك
+    tz = pytz.timezone("Africa/Tripoli")
+    now = datetime.now(tz)
+    current_time = now.strftime("%Y-%m-%d")
+
+    # تحديد التحية حسب الوقت
+    hour = now.hour
+    if 5 <= hour < 12:
+        greeting = "صباح الخير"
+    elif 12 <= hour < 17:
+        greeting = "مساء النور"
+    else:
+        greeting = "مساء الخير"
+    
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
     try:
@@ -290,4 +311,80 @@ def server():
     # اختبار ما تم جلبه
     print("Services:", services)
 
-    return render_template("dashboard/services_dashboard.html", services=services)
+    return render_template("dashboard/services_dashboard.html", services=services, username=username, greeting=greeting, current_time=current_time)
+
+
+@admin_bp.route('/dashboard/userss')
+@login_required
+@admin_required
+def admin_users_list():
+    users = User.get_all()
+    return render_template('dashboard/users.html', users=users)
+
+@admin_bp.route('/view_user/<int:user_id>')
+@login_required
+@admin_required
+def view_user(user_id):
+    user = User.get_by_id(user_id)
+    if user is None:
+        flash('المستخدم غير موجود', 'danger')
+        return redirect(url_for('admin.admin_users_list'))
+    
+
+    return render_template('dashboard/view_user.html', user=user)
+
+@admin_bp.route('/edit_user/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def edit_user(user_id):
+    user = User.get_by_id(user_id)
+
+    if not user:
+        flash('المستخدم غير موجود', 'danger')
+        return redirect(url_for('admin.admin_users_list'))
+
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        role = request.form['role']
+        status = request.form['status']
+        password = request.form.get('password')
+        user.name = name
+        user.email = email
+        user.role = role
+        user.status = status
+        user.password_hash = password if password else user.password_hash
+        user.update_user()
+
+        flash('تم تحديث المستخدم بنجاح', 'success')
+        return redirect(url_for('admin.admin_users_list'))
+
+    return render_template('dashboard/edit_user.html', user=user)
+
+@admin_bp.route('/soft_delete_user/<int:user_id>', methods=['POST'])
+@login_required
+@admin_required
+def soft_delete_user(user_id):
+    user = User.delete(user_id)
+    flash('تم تعطيل المستخدم', 'warning')
+    return redirect(url_for('admin.admin_users_list'))
+
+
+@admin_bp.route('/add_user', methods=['GET', 'POST'])
+@login_required
+@admin_required
+def add_user():
+    if request.method == 'POST':
+        name = request.form['name']
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        role = request.form['role']
+
+        user = User(name=name, username=username, email=email, password=password, role=role)
+        user.add_to_db()
+
+        flash('تم إضافة المستخدم بنجاح', 'success')
+        return redirect(url_for('admin.admin_users_list'))
+
+    return render_template('dashboard/add_user.html')

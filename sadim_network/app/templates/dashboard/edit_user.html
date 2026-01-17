@@ -1,0 +1,190 @@
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+{% extends "base.html" %}
+
+{% block title %}تعديل المستخدم | سديم{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+    /* --- تحسينات سديم لصفحة التعديل --- */
+    .edit-user-container {
+        max-width: 600px; /* تقليل العرض قليلاً لتركيز النظر */
+        margin: 2rem auto;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(223, 182, 178, 0.1);
+        border-radius: var(--radius);
+        backdrop-filter: blur(15px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .edit-title {
+        color: var(--color-light);
+        margin-bottom: 2rem;
+        border-right: 5px solid var(--color-accent);
+        padding-right: 1rem;
+        font-size: 1.6rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nebula-form-group {
+        margin-bottom: 1.2rem;
+        text-align: right;
+    }
+
+    .nebula-form-group label {
+        display: block;
+        color: var(--color-light);
+        margin-bottom: 0.6rem;
+        font-weight: 500;
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+
+    .nebula-input, .nebula-select {
+        width: 100%;
+        padding: 0.9rem 1rem;
+        background: rgba(25, 6, 31, 0.7);
+        border: 1px solid rgba(223, 182, 178, 0.2);
+        border-radius: 10px;
+        color: var(--color-deep);
+        outline: none;
+        transition: var(--transition);
+        font-family: inherit;
+    }
+
+    .nebula-input:focus, .nebula-select:focus {
+        border-color: var(--color-accent);
+        box-shadow: 0 0 15px rgba(133, 79, 108, 0.3);
+        background: rgba(43, 18, 76, 0.4);
+    }
+
+    /* تحسين شكل الاختيارات في القائمة المنسدلة */
+    .nebula-select option {
+        background: #19061f;
+        color: white;
+        padding: 10px;
+    }
+
+    /* مجموعة الأزرار - مرنة للجوال */
+    .btn-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2.5rem;
+    }
+
+    .btn-save {
+        background: var(--color-accent);
+        color: white;
+        border: none;
+        padding: 0.9rem 2rem;
+        border-radius: 50px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+        flex: 2; /* الزر الأساسي أكبر */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn-save:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(133, 79, 108, 0.4);
+        background: #9a5f7e;
+    }
+
+    .btn-cancel {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--color-light);
+        text-decoration: none;
+        padding: 0.9rem 1.5rem;
+        border-radius: 50px;
+        text-align: center;
+        border: 1px solid rgba(223, 182, 178, 0.2);
+        transition: var(--transition);
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-cancel:hover {
+        background: rgba(214, 48, 49, 0.1);
+        color: #ff7675;
+        border-color: #ff7675;
+    }
+
+    /* تعديلات الجوال */
+    @media (max-width: 600px) {
+        .edit-user-container {
+            margin: 1rem;
+            padding: 1.5rem;
+            border: none;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        .btn-group {
+            flex-direction: column; /* الأزرار فوق بعضها في الجوال لسهولة اللمس */
+        }
+        .btn-save, .btn-cancel {
+            width: 100%;
+            padding: 1.1rem;
+        }
+    }
+</style>
+
+<div class="edit-user-container">
+    <h2 class="edit-title">
+        <i class="fas fa-user-edit"></i> تعديل المستخدم: {{ user.username }}
+    </h2>
+    
+    <form method="POST">
+        <div class="nebula-form-group">
+            <label for="name"><i class="fas fa-id-card"></i> الاسم الكامل</label>
+            <input type="text" class="nebula-input" id="name" name="name" value="{{ user.name }}" required>
+        </div>
+
+        <div class="nebula-form-group">
+            <label for="email"><i class="fas fa-envelope"></i> البريد الإلكتروني</label>
+            <input type="email" class="nebula-input" id="email" name="email" value="{{ user.email }}" required>
+        </div>
+
+        <div class="nebula-form-group">
+            <label for="password"><i class="fas fa-lock"></i> كلمة المرور الجديدة</label>
+            <input type="password" class="nebula-input" id="password" name="password" placeholder="اتركها فارغة لعدم التغيير">
+        </div>
+
+        <div class="nebula-form-group">
+            <label for="role"><i class="fas fa-user-tag"></i> مستوى الصلاحية</label>
+            <select class="nebula-select" id="role" name="role">
+                <option value="user" {% if user.role == 'user' %}selected{% endif %}>👤 مستخدم</option>
+                <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>🛡️ أدمن (مدير نظام)</option>
+            </select>
+        </div>
+
+        <div class="nebula-form-group">
+            <label for="status"><i class="fas fa-toggle-on"></i> حالة الحساب</label>
+            <select class="nebula-select" id="status" name="status">
+                <option value="active" {% if user.status == 'active' %}selected{% endif %}>🟢 نشط (Active)</option>
+                <option value="suspended" {% if user.status == 'suspended' %}selected{% endif %}>🟡 معلق (Suspended)</option>
+                <option value="deleted" {% if user.status == 'deleted' %}selected{% endif %}>🔴 محذوف (Soft Delete)</option>
+            </select>
+        </div>
+
+        <div class="btn-group">
+            <button type="submit" class="btn-save">
+                <i class="fas fa-save"></i> حفظ التغييرات
+            </button>
+            <a href="{{ url_for('admin.admin_users_list') }}" class="btn-cancel">
+                إلغاء
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

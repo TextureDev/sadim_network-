@@ -2,19 +2,17 @@ import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from config.settings import DB_HOST,DB_NAME,DB_PASS,DB_PORT,DB_USER
 import psycopg2
 
-import psycopg2
-from config.settings import DB_HOST, DB_NAME, DB_USER, DB_PASS, DB_PORT  # لو عندك DB_PORT
+from config import settings
 
 def get_db_connection():
     conn = psycopg2.connect(
-        host=DB_HOST,       # "127.0.0.1" أو "localhost"
-        database=DB_NAME,   # اسم قاعدة البيانات
-        user=DB_USER,       # اسم المستخدم
-        password=DB_PASS,   # كلمة المرور
-        port=DB_PORT        # 5432 عادةً
+        host=settings.DB_HOST,       # "127.0.0.1" أو "localhost"
+        database=settings.DB_NAME,   # اسم قاعدة البيانات
+        user=settings.DB_USER,       # اسم المستخدم
+        password=settings.DB_PASS,   # كلمة المرور
+        port=settings.DB_PORT        # 5432 عادةً
     )
     return conn
 
@@ -103,3 +101,4 @@ def create_tables():
 if __name__ == '__main__':
     create_tables()
     print("Tables created successfully.")
+    print("تم إنشاء الجداول بنجاح.")

@@ -35,6 +35,7 @@
     <div id="mobile-sidebar" class="mobile-sidebar">
         <button id="close-sidebar">×</button>
         <ul class="mobile-nav-links">
+            <li class="greeting-text">{{ username }}</li>
             <li><a href="{{ url_for('loading_bp.account') }}">حسابي</a></li>
             <li><a href="{{ url_for('admin.show_services') }}">خدماتنا</a></li>
             <li><a href="{{ url_for('main.about') }}">من نحن</a></li>
@@ -43,17 +44,28 @@
         </ul>
     </div>
 
-    <section class="hero">
-        <h1 class="hero-title">حيث تبدأ الفكرة<br><span style="color: var(--color-accent)">وتجد طريقها</span></h1>
-        <p class="hero-subtitle">في شبكة سديم، لا نطارد كل فكرة، بل نختار ما يستحق أن يُبنى. نحن نحول الاحتمال المبهم إلى مسار واضح ونتيجة قابلة للنمو.</p>
-        
-        <div class="hero-images-grid">
-            <img src="{{ url_for('static', filename='images/5976816295606946886_121.jpg') }}" alt="1">
-            <img src="{{ url_for('static', filename='images/5976816295606946887_121.jpg') }}" alt="2">
-            <img src="{{ url_for('static', filename='images/5976816295606946888_120.jpg') }}" alt="3">
-            <img src="{{ url_for('static', filename='images/5976816295606946889_121.jpg') }}" alt="4">
-        </div>
-    </section>
+<section class="hero">
+    <h1 class="hero-title">حيث تبدأ الفكرة<br><span style="color: var(--color-accent)">وتجد طريقها</span></h1>
+    <p class="hero-subtitle">
+        في شبكة سديم، لا نطارد كل فكرة، بل نختار ما يستحق أن يُبنى. 
+        نحن نحول الاحتمال المبهم إلى مسار واضح ونتيجة قابلة للنمو.
+    </p>
+
+    <!-- زر مباشر للوصول للخدمات -->
+    <a href="{{ url_for('admin.show_services') }}" 
+       class="btn-primary hero-cta"
+       style="margin-top:1.5rem; padding:0.8rem 1.8rem; font-size:1.1rem; text-decoration:none;">
+        تصفح خدماتنا
+    </a>
+
+    <div class="hero-images-grid">
+        <img src="{{ url_for('static', filename='images/5976816295606946886_121.jpg') }}" alt="1">
+        <img src="{{ url_for('static', filename='images/5976816295606946887_121.jpg') }}" alt="2">
+        <img src="{{ url_for('static', filename='images/5976816295606946888_120.jpg') }}" alt="3">
+        <img src="{{ url_for('static', filename='images/5976816295606946889_121.jpg') }}" alt="4">
+    </div>
+</section>
+
 
     <section class="section-padding">
         <div class="corner-logo">
@@ -111,6 +123,40 @@
             </div>
         </div>
     </section>
+<div class="cta-section" style="
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 1rem; 
+    padding: 2rem 1rem; 
+    background: #1a051f; 
+    color: #fff; 
+    border-radius: 8px;
+    text-align: center;
+">
+    <div style="max-width: 80%;">
+        <h3>هنا خدماتنا</h3>
+        <p style="font-size: 0.9rem; margin-top: 0.5rem;">
+            اضغط على الزر أدناه لتسجيل الدخول والوصول إلى جميع خدمات شبكة سديم.
+        </p>
+    </div>
+
+    <!-- زر CTA -->
+    <a href="{{ url_for('admin.show_services') }}" 
+       class="btn-primary" 
+       style="
+           background: white; 
+           color: var(--color-primary); 
+           padding: 0.8rem 2rem; 
+           border-radius: 5px; 
+           text-decoration: none;
+           font-weight: 600;
+       ">
+        تصفح الخدمات
+    </a>
+</div>
+
 
     <footer>
         <h2 style="color: var(--color-light)">شبكة سديم</h2>

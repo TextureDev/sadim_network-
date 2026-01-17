@@ -181,6 +181,7 @@ class User:
                 email=%s,
                 password_hash=%s,
                 role=%s,
+                last_login=%s,
                 is_verified=%s,
                 updated_at=%s
             WHERE id=%s;
@@ -192,6 +193,7 @@ class User:
             self.email,
             self.password_hash,
             self.role,
+            self.last_login,
             self.is_verified,
             datetime.now(),
             self.id

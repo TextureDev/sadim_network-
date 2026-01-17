@@ -14,7 +14,7 @@ register_bp = Blueprint('register', __name__)
 @register_bp.route('/register', methods=['GET'])
 @limiter.limit("5 per minute")
 def show_registration_form():
-    return render_template('register.html')
+    return render_template('auth/register.html')
 
 
 @register_bp.route('/register', methods=['POST'])
@@ -28,16 +28,16 @@ def register_user():
 
     if password != confirm:
         flash('كلمة المرور غير متطابقة', 'danger')
-        return render_template('register.html')
+        return render_template('auth/register.html')
     # تحقق من username
     if User.get_by_username(username):
      flash('اسم المستخدم مستخدم بالفعل', 'danger')
-     return render_template('register.html')
+     return render_template('auth/register.html')
 
 # تحقق من email
     if User.get_by_email(email):
       flash('البريد الإلكتروني مستخدم بالفعل', 'danger')
-      return render_template('register.html')
+      return render_template('auth/register.html')
 
 
     # إنشاء كائن مستخدم جديد (نمرر كلمة المرور الخام؛ add_user سيقوم بالتشفير)
@@ -65,7 +65,7 @@ def register_user():
      import traceback
      traceback.print_exc()
      flash('خطأ داخلي، راجع السيرفر', 'danger')
-     return render_template('register.html')
+     return render_template('auth/register.html')
 
     # بعد حفظ المستخدم في جدول users
 @register_bp.before_app_request

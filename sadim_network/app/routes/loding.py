@@ -16,7 +16,7 @@ loading_bp = Blueprint('loading_bp', __name__)
 
 def login_page():
     return render_template(
-        'login.html',
+        'auth/login.html',
         current_time=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     )
 
@@ -31,13 +31,13 @@ def login():
     
         if not email or not password:
             flash("erros")
-            return render_template("login.html", error="بيانات الدخول غير صحيحة")
+            return render_template("auth/login.html", error="بيانات الدخول غير صحيحة")
         user = User.authenticate(email, password)
         if not user:
-            return render_template("login.html", error="بيانات الدخول غير صحيحة")
+            return render_template("auth/login.html", error="بيانات الدخول غير صحيحة")
         
         if not user.is_verified and user.role !='admin':
-            return render_template("login.html", error="يرجي التحقق من بريدك الإلكتروني قبل تسجيل الدخول.")
+            return render_template("auth/login.html", error="يرجي التحقق من بريدك الإلكتروني قبل تسجيل الدخول.")
         
         user.updated_at = datetime.now()
         user_update.update_user(user)
@@ -49,12 +49,12 @@ def login():
         session['username'] = user.username
     
         if user.role == 'admin':
-            return redirect(url_for('admin.server'))  # اسم الدالة في Blueprint dashboard
+            return redirect(url_for('admin.services_dashboard'))  # اسم الدالة في Blueprint dashboard
         else:
-            return redirect(url_for('loading_bp.landing_page'))
+            return redirect(url_for('admin.show_services'))
         
     except Exception as e:
-        return render_template("login.html", error="حدث خطأ أثناء تسجيل الدخول. يرجى المحاولة مرة أخرى.")
+        return render_template("auth/login.html", error="حدث خطأ أثناء تسجيل الدخول. يرجى المحاولة مرة أخرى.")
     
     
 @loading_bp.route('/landing')
@@ -103,7 +103,7 @@ def logout():
 @loading_bp.route("/account/settings", methods=['GET', 'POST'])
 def account_settings():
     if 'user_id' not in session:
-        return redirect(url_for('login.login'))
+        return redirect(url_for('loading_bp.login'))
 
     user = User.get_by_id(session['user_id'])
 
@@ -113,10 +113,15 @@ def account_settings():
         email = request.form.get('email')
         user.username = name
         user.email = email
-
+        
+        if delete := request.form.get('delete_account'):
+            # معالجة حذف الحساب
+            User.delete(user.id)
+            session.clear()
+            return redirect(url_for('main.index'))
         # استدعاء update وتخزين النتيجة
         result = user.update_user()
-
+        
         # التحقق من أي خطأ
         if "error" in result:
             if result["error"] == "email_exists":

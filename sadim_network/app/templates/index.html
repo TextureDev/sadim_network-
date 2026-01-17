@@ -13,27 +13,58 @@
 
 </head>
 <body>
-    <header class="header">
-        <nav class="navbar">
-            <div class="logo-container">
-                <span style="color: var(--color-accent); font-size: 0.8rem; letter-spacing: 3px;">شبكة</span>
-                <div class="logo">سديم</div>
-            </div>
+<header class="header">
+    <nav class="navbar">
+        <div class="logo-container">
+            <span style="color: var(--color-accent); font-size: 0.8rem; letter-spacing: 3px;">شبكة</span>
+            <div class="logo">سديم</div>
+        </div>
 
-            <ul class="nav-menu">
-                <li><a href="#home">الرئيسية</a></li>
-                <li><a href="{{url_for('admin.show_services')}}">خدماتنا</a></li>
-                <li><a href="mailto:thazraa2019@gmail.com">اتصل بنا</a></li>
-                <li><a href="{{url_for('main.about')}}">من نحن</a></li>
+        <!-- القائمة العادية -->
+        <ul class="nav-menu">
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="{{url_for('admin.show_services')}}">خدماتنا</a></li>
+            <li><a href="mailto:thazraa2019@gmail.com">اتصل بنا</a></li>
+            <li><a href="{{url_for('main.about')}}">من نحن</a></li>
+        </ul>
 
-            </ul>
+        <div class="nav-buttons">
+            <a href="{{ url_for('loading_bp.login') }}" class="btn-secondary">تسجيل دخول</a>
+            <a href="{{ url_for('register.register_user') }}" class="btn-primary">انضم إلينا</a>
+        </div>
 
-            <div class="nav-buttons">
-                <a href="{{ url_for('loading_bp.login') }}" class="btn-secondary">تسجيل دخول</a>
-                <a href="{{ url_for('register.register_user') }}" class="btn-primary">انضم إلينا</a>
-            </div>
-        </nav>
-    </header>
+        <!-- زر الهامبرغر للجوال -->
+        <button id="open-sidebar" class="hamburger">☰</button>
+    </nav>
+</header>
+
+<!-- قائمة الجوال -->
+<div id="mobile-sidebar" class="mobile-sidebar">
+    <button id="close-sidebar">×</button>
+    <ul class="mobile-nav-links">
+        <li><a href="#home">الرئيسية</a></li>
+        <li><a href="{{url_for('admin.show_services')}}">خدماتنا</a></li>
+        <li><a href="mailto:thazraa2019@gmail.com">اتصل بنا</a></li>
+        <li><a href="{{url_for('main.about')}}">من نحن</a></li>
+    </ul>
+
+    <div class="mobile-buttons">
+        <a href="{{ url_for('loading_bp.login') }}" class="btn-secondary">تسجيل دخول</a>
+        <a href="{{ url_for('register.register_user') }}" class="btn-primary">انضم إلينا</a>
+    </div>
+</div>
+<script>const mobileSidebar = document.getElementById('mobile-sidebar');
+const closeBtn = document.getElementById('close-sidebar');
+const openBtn = document.getElementById('open-sidebar');
+
+openBtn.addEventListener('click', () => {
+    mobileSidebar.classList.add('active');
+});
+
+closeBtn.addEventListener('click', () => {
+    mobileSidebar.classList.remove('active');
+});
+</script>
 
     <section class="hero" id="home">
         <div class="hero-content">
@@ -60,10 +91,14 @@
             </div>
             <div class="cta-section">
                 <div style="max-width: 60%;">
-                    <h3>استكشف عالمنا</h3>
-                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">اكتشف كيف يمكن لسديم أن يغير مسار أفكارك الرقمية.</p>
+                    <h3>هنا  خدماتنا</h3>
+                    <p>
+خدماتنا من التقنية المتقدمة إلى التصميم الإبداعي، كلها مصممة لتلبية احتياجاتك الرقمية بأعلى معايير الجودة والابتكار.
+                    </p>
+
+
                 </div>
-                <a href="{{ url_for('admin.show_services') }}" class="btn-primary" style="background: white; color: var(--color-primary);">اكتشف الآن</a>
+                <a href="{{ url_for('admin.show_services') }}" class="btn-primary" style="background: white; color: var(--color-primary);"> انقر حتى تشاهد الخدمات </a>
             </div>
         </div>
 

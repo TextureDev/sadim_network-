@@ -1,0 +1,147 @@
+<!-- templates/dashboard/add_user.html -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <title>إضافة مستخدم جديد</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+<style>
+    .add-user-card {
+        max-width: 600px;
+        margin: 3rem auto;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(223, 182, 178, 0.1);
+        border-radius: var(--radius);
+        padding: 2.5rem;
+        backdrop-filter: blur(15px);
+    }
+
+    .add-user-card h2 {
+        color: var(--color-light);
+        margin-bottom: 2rem;
+        border-right: 4px solid var(--color-accent);
+        padding-right: 15px;
+        font-size: 1.8rem;
+    }
+
+    /* رسائل الفلاش الكونية */
+    .flash {
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1.5rem;
+        font-weight: 500;
+        text-align: center;
+        animation: slideDown 0.4s ease;
+    }
+    .flash-success { background: rgba(46, 213, 115, 0.2); color: #2ed573; border: 1px solid #2ed573; }
+    .flash-error { background: rgba(255, 71, 87, 0.2); color: #ff4757; border: 1px solid #ff4757; }
+
+    @keyframes slideDown {
+        from { transform: translateY(-20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* تنسيق الحقول */
+    .nebula-label {
+        display: block;
+        color: var(--color-light);
+        margin-bottom: 0.5rem;
+        margin-top: 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .nebula-input, .nebula-select {
+        width: 100%;
+        padding: 0.85rem;
+        background: rgba(25, 6, 31, 0.7);
+        border: 1px solid rgba(223, 182, 178, 0.2);
+        border-radius: 10px;
+        color: var(--color-deep);
+        transition: var(--transition);
+        font-size: 1rem;
+    }
+
+    .nebula-input:focus, .nebula-select:focus {
+        border-color: var(--color-accent);
+        box-shadow: 0 0 15px rgba(133, 79, 108, 0.3);
+        outline: none;
+    }
+
+    .btn-nebula-submit {
+        width: 100%;
+        padding: 1rem;
+        margin-top: 2rem;
+        background: var(--color-accent);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+        font-size: 1.1rem;
+    }
+
+    .btn-nebula-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(133, 79, 108, 0.4);
+        background: #9a5f7e;
+    }
+
+    .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 2rem;
+        color: var(--color-light);
+        text-decoration: none;
+        opacity: 0.7;
+        transition: 0.3s;
+    }
+    .back-link:hover { opacity: 1; color: var(--color-accent); }
+</style>
+
+<body>
+    <div class="add-user-card">
+        <h2>إضافة مستخدم جديد</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash flash-{{ category }}">
+                 <i class="fas fa-info-circle"></i> {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <label class="nebula-label" for="name">الاسم الثلاثي:</label>
+            <input type="text" class="nebula-input" id="name" name="name" placeholder="أدخل الاسم الكامل" required>
+
+            <label class="nebula-label" for="username">اسم المستخدم (Username):</label>
+            <input type="text" class="nebula-input" id="username" name="username" placeholder="مثال: ahmad_2024" required>
+
+            <label class="nebula-label" for="email">البريد الإلكتروني:</label>
+            <input type="email" class="nebula-input" id="email" name="email" placeholder="email@example.com" required>
+
+            <label class="nebula-label" for="password">كلمة المرور:</label>
+            <input type="password" class="nebula-input" id="password" name="password" placeholder="••••••••" required>
+
+            <label class="nebula-label" for="role">صلاحية الوصول:</label>
+            <select class="nebula-select" id="role" name="role" required>
+                <option value="user">👤 مستخدم عادي</option>
+                <option value="admin">🔐 مشرف نظام (Admin)</option>
+            </select>
+
+            <button type="submit" class="btn-nebula-submit">
+                <i class="fas fa-user-plus"></i> تثبيت العضوية في سديم
+            </button>
+        </form>
+
+        <a href="{{ url_for('admin.admin_users_list') }}" class="back-link">
+            <i class="fas fa-arrow-right"></i> عودة إلى قائمة المستخدمين
+        </a>
+    </div>
+</body>
