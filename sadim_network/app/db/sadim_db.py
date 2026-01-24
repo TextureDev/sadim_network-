@@ -71,7 +71,7 @@ def create_tables():
         expires_at TIMESTAMP NOT NULL
     );
      """)
-    
+   
     cur.execute("""
         CREATE TABLE IF NOT EXISTS visitor_logs (
             id SERIAL PRIMARY KEY,
@@ -94,9 +94,22 @@ def create_tables():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
     """)
+
+    cur.execute("""
+        CREATE TABLE IF NOT EXISTS books (
+            id SERIAL PRIMARY KEY,
+            title TEXT NOT NULL,
+            desc_text TEXT NOT NULL, 
+            pdf_path TEXT NOT NULL,
+            cover_path TEXT NOT NULL
+        );
+    """)
     conn.commit()
     cur.close()
     conn.close()
+
+
+
 
 if __name__ == '__main__':
     create_tables()

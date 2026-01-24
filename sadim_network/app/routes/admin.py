@@ -4,6 +4,8 @@ from flask import Blueprint, render_template, request, redirect, url_for, flash,
 from werkzeug.utils import secure_filename
 import psycopg2.extras
 import pytz
+import time # أضف هذا الاستيراد في الأعلى
+
 #_________
 from app.db.sadim_db import get_db_connection
 from utlis.login_required import login_required
@@ -12,7 +14,7 @@ from datetime import datetime
 import os
 from models.user import User
 from models.product import service
-
+from app.utlis.apply_sadim_brand import apply_sadim_brand
 
 admin_bp = Blueprint('admin', __name__, url_prefix='/dashboard', template_folder='../../templates')
 
@@ -23,6 +25,115 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 #هنا يتأكد من وجود الملف و لا
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
+
+# إعدادات المجلدات (توحيد مسار الرفع)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'uploads')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+ALLOWED_EXTENSIONS = {'pdf', 'jpg', 'jpeg', 'png'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+# ==========================================
+# قسم إدارة مكتبة أجاثا كريستي (الدمج الجديد)
+# ==========================================
+
+@admin_bp.route('/library/manage')
+@login_required
+@admin_required
+def manage_library():
+    """عرض الكتب في لوحة التحكم"""
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cur.execute("SELECT * FROM books ORDER BY id DESC;")
+    books = cur.fetchall()
+    cur.close()
+    conn.close()
+    return render_template("dashboard/admin_dashboard.html", books=books)
+
+
+@admin_bp.route('/library/add', methods=['POST'])
+@login_required
+@admin_required
+def add_book_to_library():
+    title = request.form.get('title')
+    desc = request.form.get('desc')
+    pdf = request.files.get('pdf_file')
+    cover = request.files.get('cover_file')
+
+    if not all([title, pdf, cover]):
+        flash("❌ خطأ: جميع الحقول مطلوبة", "danger")
+        return redirect(url_for('admin.manage_library'))
+
+    if allowed_file(pdf.filename) and allowed_file(cover.filename):
+        # استخراج الامتدادات
+        pdf_ext = pdf.filename.rsplit('.', 1)[1].lower()
+        cover_ext = cover.filename.rsplit('.', 1)[1].lower()
+
+        # توليد اسم فريد للسيرفر (بصمة زمنية) لتجنب مشاكل العربي والملفات المتكررة
+        timestamp = int(time.time())
+        pdf_name = f"sadim_{timestamp}.{pdf_ext}"
+        cover_name = f"cover_{timestamp}.{cover_ext}"
+
+        pdf_full_path = os.path.join(UPLOAD_FOLDER, pdf_name)
+        cover_full_path = os.path.join(UPLOAD_FOLDER, cover_name)
+
+        # حفظ الملفات
+        pdf.save(pdf_full_path)
+        cover.save(cover_full_path)
+
+        # إضافة شعار سديم
+        try:
+            apply_sadim_brand(pdf_full_path)
+        except Exception as e:
+            print(f"⚠️ فشل إضافة الشعار: {e}")
+
+        # حفظ البيانات (العنوان العربي سيحفظ في خانة title)
+        conn = get_db_connection()
+        cur = conn.cursor()
+        cur.execute(
+            "INSERT INTO books (title, desc_text, pdf_path, cover_path) VALUES (%s, %s, %s, %s)",
+            (title, desc, pdf_name, cover_name) # title هنا هو الاسم العربي الذي أدخلته في الفورم
+        )
+        conn.commit()
+        cur.close()
+        conn.close()
+        
+        flash("✅ تم رفع الرواية بنجاح!", "success")
+    else:
+        flash("❌ نوع ملف غير مسموح", "warning")
+
+    return redirect(url_for('admin.manage_library'))
+
+@admin_bp.route('/library/delete/<int:book_id>', methods=['POST'])
+@login_required
+@admin_required
+def delete_book_from_library(book_id):
+    """حذف كتاب من المكتبة مع ملفاته"""
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    
+    cur.execute("SELECT pdf_path, cover_path FROM books WHERE id = %s", (book_id,))
+    book = cur.fetchone()
+
+    if book:
+        # حذف الملفات الفيزيائية
+        for key in ['pdf_path', 'cover_path']:
+            file_path = os.path.join(UPLOAD_FOLDER, book[key])
+            if os.path.exists(file_path):
+                os.remove(file_path)
+
+        cur.execute("DELETE FROM books WHERE id = %s", (book_id,))
+        conn.commit()
+        flash("🗑️ تم حذف الكتاب وملفاته بنجاح", "danger")
+    
+    cur.close()
+    conn.close()
+    return redirect(url_for('admin.manage_library'))
+
 # ------------------ صفحة عرض جميع الخدمات ------------------
 @admin_bp.route('/services')
 
