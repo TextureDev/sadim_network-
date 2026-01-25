@@ -118,6 +118,41 @@
             .about-agatha { flex-direction: column; text-align: center; gap: 20px; }
             .about-img { width: 140px; height: 140px; }
         }
+        .progress-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 5%;
+    text-align: center;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: var(--soft-gold);
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid var(--border-gold);
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--royal-gold); /* التدرج الذهبي الذي استخدمناه */
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+    transition: width 1.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* تنسيق للهاتف */
+@media (max-width: 768px) {
+    .progress-info { font-size: 0.8rem; }
+}
     </style>
 </head>
 <body>
@@ -175,6 +210,20 @@
     <div class="about-content">
         <h2 style="color: var(--soft-gold); font-family: 'Amiri', serif;">أجاثا كريستي.. سيدة الغموض</h2>
         <p style="max-width: 600px;">الروائية الأكثر مبيعاً في التاريخ؛ خطّت بعبقريتها 66 رواية بوليسية و14 مجموعة قصصية غيّرت وجه الأدب العالمي للأبد.</p>
+    </div>
+</section>
+
+<section class="progress-container">
+    {% set total_books = 66 %}
+    {% set current_books = books|length %}
+    {% set percent = (current_books / total_books * 100)|round|int %}
+    
+    <div class="progress-info">
+        <span>اكتمل رفع <strong>{{ current_books }}</strong> من أصل <strong>{{ total_books }}</strong> رواية</span>
+        <span>{{ percent }}%</span>
+    </div>
+    <div class="progress-bar-bg">
+        <div class="progress-bar-fill" style="width: {{ percent }}%;"></div>
     </div>
 </section>
 
