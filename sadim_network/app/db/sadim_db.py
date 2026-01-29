@@ -101,6 +101,7 @@ def create_tables():
             title TEXT NOT NULL,
             desc_text TEXT NOT NULL, 
             pdf_path TEXT NOT NULL,
+            download_count INTEGER DEFAULT 0,
             cover_path TEXT NOT NULL
         );
     """)

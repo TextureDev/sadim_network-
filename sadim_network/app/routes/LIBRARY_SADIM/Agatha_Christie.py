@@ -4,7 +4,9 @@ from flask import (
     url_for,
     session,
     redirect,
-    send_from_directory
+    send_from_directory,
+    request,
+    flash
 )
 from app.db.sadim_db import get_db_connection
 import os
@@ -54,22 +56,52 @@ def agatha_christie():
     return render_template("Agatha Christie/Agatha.html", books=books)
 
 # =========================
-# تحميل الملفات (رابط التحميل)
+# 1. تحديث عداد التحميلات (تفاعل لحظي - JSON)
 # =========================
+@Library_Agatha_bp.route('/library/increment_download/<int:book_id>', methods=['POST'])
+def increment_download(book_id):
+    if 'user_id' not in session:
+       flash("يجب تسجيل الدخول لتحميل الكتب.", "warning")
+       return redirect(url_for('loading_bp.login'))
+   
+    conn = get_db_connection()
+    cur = conn.cursor() # لا نحتاج RealDictCursor هنا لأننا سنعيد قيمة واحدة
+    try:
+        # نستخدم COALESCE لتفادي الخطأ إذا كانت القيمة NULL، ونعيد القيمة الجديدة فوراً
+        cur.execute("""
+            UPDATE books 
+            SET download_count = COALESCE(download_count, 0) + 1 
+            WHERE id = %s 
+            RETURNING download_count
+        """, (book_id,))
+        
+        new_count = cur.fetchone()[0]
+        conn.commit()
+        return {"success": True, "new_count": new_count}
+    except Exception as e:
+        conn.rollback()
+        return {"success": False, "error": str(e)}, 500
+    finally:
+        cur.close()
+        conn.close()
 
+# =========================
+# 2. تحميل الملف الفعلي (بدون تحديث العداد هنا)
+# =========================
 @Library_Agatha_bp.route('/library/download/<int:book_id>')
 def download_file(book_id):
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    
+    # نجلب بيانات الكتاب فقط
     cur.execute("SELECT title, pdf_path FROM books WHERE id = %s", (book_id,))
     book = cur.fetchone()
+    
     cur.close()
     conn.close()
 
     if book:
         file_path = os.path.join(UPLOAD_FOLDER, book['pdf_path'])
-        print(f"DEBUG: Looking for file at: {file_path}") # سيظهر المسار في التيرمينال عندك
-        
         if os.path.exists(file_path):
             return send_from_directory(
                 UPLOAD_FOLDER, 
@@ -77,8 +109,35 @@ def download_file(book_id):
                 as_attachment=True,
                 download_name=f"{book['title']}.pdf"
             )
-        else:
-            print("DEBUG: File does not exist on disk!")
-            return "الملف غير موجود على السيرفر", 404
+        return "الملف غير موجود على السيرفر", 404
             
     return "الكتاب غير موجود في قاعدة البيانات", 404
+
+# =========================
+# 3. البحث (تمت إضافة حقل download_count)
+# =========================
+@Library_Agatha_bp.route('/search')
+def search():
+    query = request.args.get('q', '')
+
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+    # أضفنا id و cover_path و download_count لتعمل نتائج البحث بنفس كفاءة الصفحة الرئيسية
+    cur.execute("""
+        SELECT id, title, desc_text, pdf_path, cover_path, download_count
+        FROM books
+        WHERE title ILIKE %s
+        ORDER BY id DESC
+    """, (f"%{query}%",))
+
+    books = cur.fetchall()
+
+    cur.close()
+    conn.close()
+
+    return render_template(
+        "Agatha Christie/search_results.html",
+        query=query,
+        books=books
+    )

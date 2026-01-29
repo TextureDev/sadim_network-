@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
     
 
@@ -19,7 +19,8 @@
             <ul>
                 <li><a href="{{ url_for('main.index') }}">الرئيسية</a></li>
                 <li><a href="{{ url_for('admin.show_services') }}">خدماتنا</a></li>
-                <li><a href="##">اتصل بنا</a></li>
+                <li><a href="{{ url_for('Library_Agatha.agatha_christie') }}">مكتبة أجاثا</a></li> 
+                <li><a href="mailto:moslah20040@gmail.com?subject= اتصل بنا  "><i class="fa-solid fa-envelope"></i> اتصل بنا</a></li>
             </ul>
         </nav>
     </header>
@@ -48,6 +49,21 @@
                 والبرمجة بالأدب، لنخلق تجربة مستخدم لا تُنسى تتجاوز مجرد تقديم الخدمة إلى بناء علاقة مستدامة.
             </p>
         </div>
+        <div class="section-box">
+            <h2>ماذا نقدم الآن؟</h2>
+            <p>
+                شبكة سديم هي منظومة رقمية تقدم محتوى معرفي وأدبي،
+                وتجمع بين المكتبات الرقمية، القنوات المتخصصة،
+                والمشاريع التقنية التجريبية في منصة واحدة.
+            </p>
+        
+            <ul style="margin-top: 1.5rem; line-height: 2;">
+                <li>📚 <strong>مكتبات رقمية:</strong> روايات وكتب متاحة للقراءة والتحميل.</li>
+                <li>📢 <strong>قنوات محتوى:</strong> أدب، معرفة، وتوثيق رقمي عبر تليجرام.</li>
+                <li>🧪 <strong>مشاريع رقمية:</strong> تجارب تقنية ومبادرات قيد التطوير.</li>
+                <li>🌐 <strong>منصة موحدة:</strong> تجمع كل فروع سديم في مكان واحد.</li>
+            </ul>
+        </div>
 
 <h2 style="text-align: center; margin-bottom: 2rem;">منظومة شبكة سديم</h2>
 
@@ -70,6 +86,11 @@
     <div class="card-icon">💬</div>
     <p>أرشيف شبكة سديم<br><small>نقاش وتوثيق</small></p>
 </a>
+<a href="https://sadim.cloud/library/agatha_christie" target="_blank" class="team-card library">
+        <img src="{{ url_for('static', filename='images/logo.png') }}">
+        <div class="card-icon">📖</div>
+        <p>مكتبة أجاثا كريستي<br><small>جزء من مكتبات شبكة سديم</small></p>
+ </a>
 
 </div>
 

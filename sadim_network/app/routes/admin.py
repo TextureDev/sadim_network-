@@ -108,6 +108,74 @@ def add_book_to_library():
 
     return redirect(url_for('admin.manage_library'))
 
+
+@admin_bp.route('/library/edit/<int:book_id>', methods=['POST'])
+@login_required
+@admin_required
+def edit_book_in_library(book_id):
+    """تعديل كتاب في المكتبة مباشرة من لوحة الإدارة"""
+    title = request.form.get(f"title-{book_id}")
+    desc = request.form.get(f"desc-{book_id}")
+
+    if not title:
+        flash("❌ العنوان مطلوب", "danger")
+        return redirect(url_for('admin.manage_library'))
+
+    # الملفات المرفوعة (قد تكون None)
+    cover = request.files.get(f"cover_file-{book_id}")
+    pdf = request.files.get(f"pdf_file-{book_id}")
+
+    conn = get_db_connection()
+    cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+    # جلب الكتاب الحالي لتحديد الملفات القديمة
+    cur.execute("SELECT cover_path, pdf_path FROM books WHERE id=%s", (book_id,))
+    book = cur.fetchone()
+
+    # تحديث الملفات إذا تم رفع جديدة
+    cover_name = book['cover_path']
+    pdf_name = book['pdf_path']
+
+    timestamp = int(time.time())
+
+    if cover and allowed_file(cover.filename):
+        old_cover_path = os.path.join(UPLOAD_FOLDER, cover_name)
+        if os.path.exists(old_cover_path):
+            os.remove(old_cover_path)
+
+        ext = cover.filename.rsplit('.', 1)[1].lower()
+        cover_name = f"cover_{timestamp}.{ext}"
+        cover.save(os.path.join(UPLOAD_FOLDER, cover_name))
+
+    if pdf and allowed_file(pdf.filename):
+        old_pdf_path = os.path.join(UPLOAD_FOLDER, pdf_name)
+        if os.path.exists(old_pdf_path):
+            os.remove(old_pdf_path)
+
+        ext = pdf.filename.rsplit('.', 1)[1].lower()
+        pdf_name = f"sadim_{timestamp}.{ext}"
+        pdf.save(os.path.join(UPLOAD_FOLDER, pdf_name))
+
+        # إضافة شعار سديم للملف الجديد
+        try:
+            apply_sadim_brand(os.path.join(UPLOAD_FOLDER, pdf_name))
+        except Exception as e:
+            print(f"⚠️ فشل إضافة الشعار: {e}")
+
+    # تحديث قاعدة البيانات
+    cur.execute(
+        "UPDATE books SET title=%s, desc_text=%s, cover_path=%s, pdf_path=%s WHERE id=%s",
+        (title, desc, cover_name, pdf_name, book_id)
+    )
+    conn.commit()
+    cur.close()
+    conn.close()
+
+    flash("✅ تم تحديث بيانات الكتاب بنجاح", "success")
+    return redirect(url_for('admin.manage_library'))
+
+
+
 @admin_bp.route('/library/delete/<int:book_id>', methods=['POST'])
 @login_required
 @admin_required

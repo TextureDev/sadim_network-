@@ -1,0 +1,242 @@
+/* ======================================
+   ROOT VARIABLES
+   ====================================== */
+:root {
+    --color-light: #ffffff;
+    --color-dark: #121212;
+    --color-accent: #85506c;
+    --color-accent-light: #a66b8f;
+    --tech-cyan: #00ffff;
+    --transition: 0.3s ease-in-out;
+}
+
+/* ======================================
+   DARK / LIGHT MODE SUPPORT
+   ====================================== */
+body {
+    background: #0f0f0f;
+    color: var(--color-light);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.light-mode {
+    background: #f5f5f5;
+    color: #222;
+}
+
+/* ======================================
+   DASHBOARD CONTROLS
+   ====================================== */
+.dashboard-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* --- FILTER GROUP --- */
+.filter-group {
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 5px;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow-x: auto;
+    justify-content: flex-start;
+}
+
+.btn-filter {
+    padding: 0.5rem 1.2rem;
+    border-radius: 50px;
+    border: none;
+    background: transparent;
+    color: var(--color-light);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.btn-filter:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-filter.active {
+    background: var(--color-accent);
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(133, 79, 108, 0.3);
+}
+
+/* --- SEARCH BOX --- */
+.search-box {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(223, 182, 178, 0.2);
+    padding: 0.7rem 1.5rem;
+    border-radius: 50px;
+    color: var(--color-light);
+    outline: none;
+    width: 250px;
+    transition: var(--transition);
+}
+
+.search-box:focus {
+    border-color: var(--color-accent);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(133, 79, 108, 0.3);
+    width: 280px;
+}
+
+/* ======================================
+   LISTS AND UTILITIES
+   ====================================== */
+#topPaths li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-family: 'Courier New', monospace;
+    transition: 0.2s;
+    border-radius: 8px;
+}
+
+#topPaths li:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+#topPaths li strong {
+    color: var(--tech-cyan);
+}
+
+.hidden-row {
+    display: none !important;
+}
+
+/* ======================================
+   STATS CARDS
+   ====================================== */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(223, 182, 178, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(133, 79, 108, 0.25);
+}
+
+/* ======================================
+   ADMIN CONTROLS
+   ====================================== */
+.admin-controls {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 2rem auto;
+    max-width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+/* --- COMMON BUTTON STYLES --- */
+.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+    color: #fff;
+}
+
+.btn-action i {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-action:hover i {
+    transform: rotate(15deg);
+}
+
+/* --- NAV BUTTON --- */
+.btn-nav {
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    box-shadow: 0 4px 15px rgba(108, 92, 231, 0.2);
+}
+
+.btn-nav:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+    filter: brightness(1.1);
+}
+
+/* --- DELETE BUTTON --- */
+.btn-delete {
+    background: linear-gradient(135deg, #d63031, #ff7675);
+    box-shadow: 0 4px 15px rgba(214, 48, 49, 0.2);
+}
+
+.btn-delete:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(214, 48, 49, 0.4);
+    filter: brightness(1.1);
+}
+
+/* ======================================
+   RESPONSIVE DESIGN
+   ====================================== */
+@media (max-width: 600px) {
+    .dashboard-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-box {
+        width: 100% !important;
+        margin-bottom: 0.5rem;
+    }
+
+    .btn-action {
+        width: 100%;
+    }
+}
+
+/* ======================================
+   DARK/LIGHT MODE TOGGLE
+   ====================================== */
+body.light-mode .card,
+body.light-mode .admin-controls,
+body.light-mode .filter-group,
+body.light-mode .search-box {
+    background: rgba(0,0,0,0.03);
+    border-color: rgba(0,0,0,0.1);
+}
+
+body.light-mode #topPaths li:hover {
+    background: rgba(0,0,0,0.02);
+}

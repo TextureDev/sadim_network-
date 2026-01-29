@@ -1,0 +1,94 @@
+<section class="books-section" style="padding: 2rem; background-color: var(--color-bg);">
+    <div class="grid">
+        {% for book in books %}
+            <article class="book-card">
+                <div class="book-content">
+                    <h3 class="book-title">{{ book.title }}</h3>
+                    <p class="book-description">{{ book.desc_text }}</p>
+                    
+                    <div class="card-footer">
+                        <a href="{{ url_for('static', filename=book.pdf_path) }}" 
+                           target="_blank" 
+                           class="btn-read">
+                            <span class="icon">📄</span>
+                            قراءة الملف
+                        </a>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+
+<style>
+    /* تنسيقات إضافية مخصصة للبطاقات بناءً على هويتك البصرية */
+    .book-card {
+        background-color: #ffffff; /* خلفية بيضاء نقية للوضوح */
+        border-right: 5px solid var(--color-primary); /* تمييز الجهة اليمنى (RTL) */
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        box-shadow: 0 4px 15px rgba(25, 0, 25, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .book-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(43, 18, 76, 0.15);
+        border-right-color: var(--color-accent);
+    }
+
+    .book-title {
+        color: var(--color-primary);
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+
+    .book-description {
+        color: var(--color-secondary);
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 2rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* قص النص الطويل */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .btn-read {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: var(--color-accent);
+        color: #fff;
+        text-decoration: none;
+        padding: 0.7rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: var(--transition);
+        width: 100%;
+        justify-content: center;
+    }
+
+    .btn-read:hover {
+        background-color: var(--color-primary);
+        color: var(--color-light);
+    }
+
+    .card-footer {
+        margin-top: auto;
+    }
+
+    /* تحسين العرض على الجوال */
+    @media (max-width: 600px) {
+        .book-card {
+            padding: 1rem;
+        }
+        .book-title {
+            font-size: 1.2rem;
+        }
+    }
+</style>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>شبكة سديم - حلمك يبدأ هنا</title>
+    <title>شبكة سديم</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css') }}">
 
@@ -23,6 +23,7 @@
         <!-- القائمة العادية -->
         <ul class="nav-menu">
             <li><a href="#home">الرئيسية</a></li>
+            <li><a href="{{ url_for('Library_Agatha.agatha_christie') }}">مكتبة أجاثا</a></li>
             <li><a href="{{url_for('admin.show_services')}}">خدماتنا</a></li>
             <li><a href="mailto:thazraa2019@gmail.com">اتصل بنا</a></li>
             <li><a href="{{url_for('main.about')}}">من نحن</a></li>
@@ -43,6 +44,7 @@
     <button id="close-sidebar">×</button>
     <ul class="mobile-nav-links">
         <li><a href="#home">الرئيسية</a></li>
+        <li><a href="{{ url_for('Library_Agatha.agatha_christie') }}">مكتبة أجاثا</a></li>
         <li><a href="{{url_for('admin.show_services')}}">خدماتنا</a></li>
         <li><a href="mailto:thazraa2019@gmail.com">اتصل بنا</a></li>
         <li><a href="{{url_for('main.about')}}">من نحن</a></li>
@@ -74,7 +76,14 @@ closeBtn.addEventListener('click', () => {
             </p>
         </div>
     </section>
-
+    <section class="library-philosophy">
+        <p>
+            مكتبة سديم ليست مجرد مكان لتحميل الكتب أو تصفحها. 
+            <strong>هي امتداد لفلسفتنا الرقمية:</strong> 
+            التقنية بلا وعي تتحول إلى ضجيج، والثقافة بلا تنظيم تتحول إلى فوضى. 
+            هنا، نجمع بين الاثنين لنقدم منتجات رقمية ذات معنى، حيث تُدار كل مكتبة وكل مشروع ثقافي بنفس الانضباط والدقة التي تُدار بها أنظمتنا التقنية: تحرير، تنظيم، هوية، ومسؤولية تجاه كل مستخدم.
+        </p>
+    </section>
     <section class="services" id="services">
         <div class="corner-logo">
             <h1 class="corner-main">سديم</h1>

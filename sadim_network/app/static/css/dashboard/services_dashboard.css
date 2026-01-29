@@ -1,0 +1,144 @@
+
+        /* التنسيقات الأساسية - مع الحفاظ على الألوان */
+        body {
+            padding: 1rem; /* تقليل الحواف للجوال */
+            background-color: var(--color-bg);
+            color: var(--color-deep);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* شريط الترحيب العلوي - متجاوب */
+        .admin-header {
+            background-color: var(--color-primary);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column; /* عمودي في الجوال */
+            gap: 8px;
+            text-align: center;
+            border: 1px solid rgba(223, 182, 178, 0.1);
+        }
+
+        .greeting {
+            color: var(--color-light);
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--color-light);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--color-accent);
+            padding-bottom: 10px;
+        }
+
+        /* شبكة الأزرار - تحسين للجوال */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* زرين في كل صف للجوال */
+            gap: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .nav-grid a {
+            padding: 0.8rem 0.5rem;
+            background-color: rgba(255, 255, 255, 0.03);
+            color: var(--color-light);
+            border: 1px solid rgba(223, 182, 178, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .nav-grid a i { font-size: 1.1rem; }
+
+        .nav-grid a:active { transform: scale(0.95); } /* تأثير الضغط للمس */
+
+        .special { background-color: var(--color-primary) !important; border-color: var(--color-accent) !important; }
+
+        /* شبكة الخدمات - بطاقة كاملة العرض في الجوال */
+        .services-dashboard {
+            display: grid;
+            grid-template-columns: 1fr; /* عمود واحد للجوال */
+            gap: 1rem;
+        }
+
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.02);
+            border-radius: var(--radius);
+            padding: 1rem;
+            display: flex;
+            flex-direction: row; /* الصورة بجانب النص */
+            gap: 1rem;
+            border: 1px solid rgba(223, 182, 178, 0.1);
+        }
+
+        .service-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .service-info { flex-grow: 1; min-width: 0; }
+
+        .service-info h3 {
+            margin: 0 0 4px 0;
+            font-size: 1rem;
+            color: var(--color-light);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .service-info p {
+            margin: 0;
+            font-size: 0.75rem;
+            color: var(--color-deep);
+            opacity: 0.8;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .price-tag { color: var(--color-accent); font-weight: bold; margin-top: 5px !important; }
+
+        /* أزرار الحذف والتعديل - تحسين للمس */
+        .service-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .service-actions a {
+            padding: 8px 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .btn-edit { background: rgba(223, 182, 178, 0.1); color: var(--color-light); border: 1px solid var(--color-light); }
+        .btn-delete { background: rgba(216, 92, 92, 0.1); color: #ff7675; border: 1px solid #d85c5c; }
+
+        /* شاشات الكمبيوتر والتابلت */
+        @media (min-width: 768px) {
+            body { padding: 2rem; }
+            .admin-header { flex-direction: row; justify-content: space-between; }
+            .nav-grid { grid-template-columns: repeat(4, 1fr); }
+            .services-dashboard { grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); }
+            .service-card img { width: 100px; height: 100px; }
+            .service-info h3 { font-size: 1.1rem; }
+        }

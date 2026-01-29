@@ -1,166 +1,10 @@
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-<link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
-
-
-
-<style>
-    /* --- لوحة إحصائيات الزوار - سديم --- */
-    
-    body {
-        background-color: var(--color-bg);
-        color: var(--color-deep);
-        padding: 2rem;
-    }
-
-    .title {
-        color: var(--color-light);
-        text-align: center;
-        margin-bottom: 2.5rem;
-        font-size: 2.5rem;
-        font-weight: 800;
-        border-bottom: 2px solid var(--color-accent);
-        display: inline-block;
-        padding-bottom: 10px;
-        width: 100%;
-    }
-
-    /* كروت الإحصائيات السريعة */
-    .stats-container {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        margin-bottom: 3rem;
-    }
-
-    .card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(223, 182, 178, 0.1);
-        min-width: 250px;
-        padding: 2rem;
-        border-radius: var(--radius);
-        text-align: center;
-        backdrop-filter: blur(10px);
-        transition: var(--transition);
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-        border-color: var(--color-accent);
-    }
-
-    .stats-label {
-        color: var(--color-light);
-        font-size: 1.1rem;
-        opacity: 0.8;
-        margin-bottom: 1rem;
-    }
-
-    .stats-number {
-        color: var(--color-accent);
-        font-size: 3rem;
-        font-weight: 900;
-        text-shadow: 0 0 15px rgba(133, 79, 108, 0.3);
-    }
-
-    /* أزرار التحكم */
-    .admin-controls {
-        display: flex;
-        justify-content: center;
-        gap: 1rem;
-        margin-bottom: 2rem;
-        flex-wrap: wrap;
-    }
-
-    .btn-action {
-        padding: 0.8rem 1.5rem;
-        border-radius: 50px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: var(--transition);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        border: 1px solid rgba(223, 182, 178, 0.2);
-    }
-
-    .btn-delete {
-        background: rgba(216, 92, 92, 0.1);
-        color: #ff7675;
-        border-color: #d85c5c;
-    }
-
-    .btn-delete:hover {
-        background: #d85c5c;
-        color: white;
-    }
-
-    .btn-nav {
-        background: var(--color-primary);
-        color: var(--color-light);
-    }
-
-    .btn-nav:hover {
-        background: var(--color-accent);
-        color: white;
-    }
-
-    /* الجدول السديمي */
-    .table-wrapper {
-        background: rgba(255, 255, 255, 0.02);
-        border-radius: var(--radius);
-        padding: 1rem;
-        border: 1px solid rgba(223, 182, 178, 0.1);
-        overflow-x: auto;
-    }
-
-    .styled-table {
-        width: 100%;
-        border-collapse: collapse;
-        color: var(--color-deep);
-    }
-
-    .table-caption {
-        font-size: 1.3rem;
-        color: var(--color-light);
-        margin-bottom: 1.5rem;
-        text-align: right;
-        padding-right: 10px;
-    }
-
-    .styled-table thead tr {
-        background-color: rgba(43, 18, 76, 0.6);
-        color: var(--color-light);
-        text-align: right;
-    }
-
-    .styled-table th, .styled-table td {
-        padding: 1.2rem;
-        border-bottom: 1px solid rgba(223, 182, 178, 0.05);
-    }
-
-    .styled-table tbody tr:hover {
-        background-color: rgba(133, 79, 108, 0.1);
-    }
-
-    /* تفاصيل البيانات */
-    .ip-cell { font-family: 'Courier New', monospace; color: var(--color-accent); }
-    .ua-cell { font-size: 0.85rem; opacity: 0.7; max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .page-cell { color: var(--tech-cyan); font-weight: 500; }
-    .time-cell { font-size: 0.9rem; opacity: 0.8; }
-
-</style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard/dashboard_home.css') }}">
 
 <h2 class="title">إحصائيات الزوار الرقمية</h2>
 
-<div class="stats-container">
-    <div class="card">
-        <p class="stats-label"><i class="fas fa-eye"></i> إجمالي عدد الزيارات</p>
-        <p class="stats-number">{{ total_visits }}</p>
-    </div>
-</div>
-
-<div class="admin-controls">
+<div class="admin-controls" style="margin-top: 2rem; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
     <form action="{{ url_for('admin.delete_visits') }}" method="post" style="display:inline;">
         <button type="submit" class="btn-action btn-delete" onclick="return confirm('هل أنت متأكد من مسح كافة السجلات؟ لا يمكن التراجع!');">
             <i class="fas fa-trash-alt"></i> حذف السجل بالكامل
@@ -176,22 +20,49 @@
     <a href="{{ url_for('admin.services_dashboard') }}" class="btn-action btn-nav">
         <i class="fas fa-arrow-right"></i> لوحة التحكم
     </a>
+
 </div>
 
-<div class="table-wrapper">
-    <table class="styled-table">
-        <caption class="table-caption">سجل التحركات الأخيرة</caption>
+<div class="dashboard-controls">
+    <div class="filter-group">
+        <button class="btn-filter active" onclick="SadeemDash.applyTimeFilter('all', this)">الكل</button>
+        <button class="btn-filter" onclick="SadeemDash.applyTimeFilter('today', this)">اليوم</button>
+        <button class="btn-filter" onclick="SadeemDash.applyTimeFilter('hour', this)">آخر ساعة</button>
+    </div>
+    <input type="text" class="search-box" id="dashSearch" placeholder="🔍 ابحث عن IP أو صفحة...">
+    <button class="btn-action btn-nav" onclick="SadeemDash.exportToCSV()">
+        <i class="fas fa-file-download"></i> تحميل الأرشيف التحليلي (CSV)
+    </button>
+</div>
+
+<div class="stats-container" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+    <div class="card" style="flex: 1; min-width: 300px;">
+        <h4 style="color: var(--color-light); margin-bottom: 15px;">📊 نوع الزيارات</h4>
+        <canvas id="typeChart" style="max-height: 200px;"></canvas>
+    </div>
+    <div class="card" style="flex: 1; min-width: 300px;">
+        <h4 style="color: var(--color-light); margin-bottom: 15px;">📱 الأجهزة</h4>
+        <canvas id="deviceChart" style="max-height: 200px;"></canvas>
+    </div>
+    <div class="card" style="flex: 1; min-width: 300px;">
+        <h4 style="color: var(--color-light); margin-bottom: 15px;">🔝 الأكثر طلباً (بشر)</h4>
+        <ul id="topPaths" style="text-align: right; color: var(--color-light); list-style: none; padding: 0;"></ul>
+    </div>
+</div>
+
+<div class="table-wrapper" style="margin-top: 2rem;">
+    <table class="styled-table" id="logsTable">
         <thead>
             <tr>
                 <th>IP العنوان</th>
-                <th>المتصفح والنظام (UA)</th>
-                <th>الصفحة التي تمت زيارتها</th>
+                <th>الجهاز (UA)</th>
+                <th>المسار</th>
                 <th>التوقيت</th>
             </tr>
         </thead>
         <tbody>
             {% for v in visits %}
-            <tr>
+            <tr class="log-row">
                 <td class="ip-cell">{{ v[0] }}</td>
                 <td class="ua-cell" title="{{ v[1] }}">{{ v[1] }}</td>
                 <td class="page-cell">{{ v[2] }}</td>
@@ -201,3 +72,174 @@
         </tbody>
     </table>
 </div>
+
+
+
+<script>
+const SadeemDash = {
+    store: [],
+    charts: {},
+    currentFilter: 'all',
+
+    init() {
+        this.parseTable();
+        this.initCharts();
+        this.setupSearch();
+        this.refresh();
+    },
+
+    parseTable() {
+        const rows = document.querySelectorAll(".log-row");
+        this.store = Array.from(rows).map(row => ({
+            el: row,
+            ip: row.cells[0].innerText.trim(),
+            ua: row.cells[1].getAttribute('title') || row.cells[1].innerText.toLowerCase(),
+            path: row.cells[2].innerText.trim(),
+            date: new Date(row.cells[3].innerText.replace(/-/g, '/'))
+        }));
+    },
+
+    applyFilters() {
+        const searchTerm = document.getElementById('dashSearch').value.toLowerCase();
+        const now = new Date();
+
+        this.store.forEach(item => {
+            const matchesSearch = item.ip.includes(searchTerm) || item.path.toLowerCase().includes(searchTerm);
+            let matchesTime = true;
+            if (this.currentFilter === 'today') {
+                matchesTime = item.date.toDateString() === now.toDateString();
+            } else if (this.currentFilter === 'hour') {
+                matchesTime = (now - item.date) < 3600000;
+            }
+            item.el.classList.toggle('hidden-row', !(matchesSearch && matchesTime));
+        });
+        this.refresh();
+    },
+
+    applyTimeFilter(mode, btn) {
+        document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        this.currentFilter = mode;
+        this.applyFilters();
+    },
+
+    setupSearch() {
+        let timeout;
+        document.getElementById('dashSearch').addEventListener('input', () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => this.applyFilters(), 250);
+        });
+    },
+
+    getVisibleStats() {
+        const visible = this.store.filter(i => !i.el.classList.contains('hidden-row'));
+        const stats = {
+            type: { human: 0, bot: 0, files: 0 },
+            device: { desktop: 0, mobile: 0 },
+            paths: {}
+        };
+
+        visible.forEach(item => {
+            const isFile = item.path.match(/\.(css|js|jpg|jpeg|png|gif|svg|ico|webp)$/i);
+            
+            if (item.ua.includes('bot') || item.ua.includes('crawl')) {
+                stats.type.bot++;
+            } else if (isFile) {
+                stats.type.files++;
+            } else {
+                stats.type.human++;
+                stats.paths[item.path] = (stats.paths[item.path] || 0) + 1;
+            }
+
+            if (/mobile|android|iphone|ipad/i.test(item.ua)) stats.device.mobile++;
+            else stats.device.desktop++;
+        });
+        return stats;
+    },
+
+    refresh() {
+        const stats = this.getVisibleStats();
+        
+        if (this.charts.type) {
+            this.charts.type.data.datasets[0].data = [stats.type.human, stats.type.bot, stats.type.files];
+            this.charts.type.update();
+        }
+
+        if (this.charts.device) {
+            this.charts.device.data.datasets[0].data = [stats.device.desktop, stats.device.mobile];
+            this.charts.device.update();
+        }
+
+        const topPathsEl = document.getElementById('topPaths');
+        const sortedPaths = Object.entries(stats.paths).sort((a,b) => b[1] - a[1]).slice(0,5);
+        
+        topPathsEl.innerHTML = sortedPaths.length ? sortedPaths.map(([p,c]) => 
+            `<li><span>${p}</span><strong style="color:#00cec9">${c}</strong></li>`
+        ).join('') : '<li style="opacity:0.5; font-size:0.8rem">لا توجد بيانات سلوكية...</li>';
+    },
+
+    initCharts() {
+        const chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { position: 'bottom', labels: { color: '#fff', font: { size: 10 } } }
+            },
+            cutout: '70%'
+        };
+
+        this.charts.type = new Chart(document.getElementById('typeChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['بشر','بوتات','ملفات'],
+                datasets: [{ 
+                    data: [0,0,0], 
+                    backgroundColor: ['#00cec9','#d63031','#854f6c'], 
+                    borderWidth: 0 
+                }]
+            },
+            options: chartOptions
+        });
+
+        this.charts.device = new Chart(document.getElementById('deviceChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['كمبيوتر','جوال'],
+                datasets: [{ 
+                    data: [0,0], 
+                    backgroundColor: ['#fdcb6e','#0984e3'], 
+                    borderWidth: 0 
+                }]
+            },
+            options: chartOptions
+        });
+    },
+
+    exportToCSV() {
+        let csv = "\uFEFF"; 
+        csv += "الرقم,IP العنوان,المسار المستهدف,التوقيت المحلي,نوع الجهاز,التصنيف السلوكي,بيانات الجهاز الكاملة\n";
+        
+        this.store.forEach((l, index) => {
+            const isMobile = /mobile|android|iphone|ipad/i.test(l.ua);
+            const deviceType = isMobile ? "جوال" : "كمبيوتر";
+            
+            let category = "بشر";
+            if (l.ua.includes('bot') || l.ua.includes('crawl')) category = "بوت/زاحف";
+            else if (l.path.match(/\.(css|js|jpg|png|ico|svg|webp)$/i)) category = "طلب ملفات";
+
+            const cleanUA = l.ua.replace(/,/g, ';');
+            const formattedDate = l.date.toLocaleString('ar-SA');
+
+            csv += `${index + 1},${l.ip},${l.path},"${formattedDate}",${deviceType},${category},${cleanUA}\n`;
+        });
+
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = `Sadeem_Behavior_Analysis_${new Date().toLocaleDateString()}.csv`;
+        link.click();
+    }
+};
+
+document.addEventListener("DOMContentLoaded", () => SadeemDash.init());
+</script>

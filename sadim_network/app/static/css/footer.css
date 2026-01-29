@@ -343,3 +343,25 @@
 .footer-links li a:hover {
     color: var(--color-accent, #ff00ff); /* لون مميز عند المرور بالماوس */
 }
+/* --- Library Philosophy Section --- */
+.library-philosophy {
+    padding: 6rem 10%;
+    background: rgba(255, 255, 255, 0.03); /* شبه شفاف لتباين لطيف مع Hero */
+    border-radius: var(--radius);
+    text-align: center;
+    max-width: 900px;
+    margin: 4rem auto;
+    line-height: 1.8;
+    font-size: 1.3rem;
+    color: var(--color-light);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.library-philosophy strong {
+    color: var(--color-accent);
+}
+.library-philosophy {
+    border: 1px solid rgba(223, 182, 178, 0.1); /* إطار رقيق جداً بلون النجوم */
+    backdrop-filter: blur(5px); /* تأثير ضبابي للخلفية خلف النص */
+}

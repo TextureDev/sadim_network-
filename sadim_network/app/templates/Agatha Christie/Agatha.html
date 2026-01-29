@@ -5,155 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مكتبة أجاثا كريستي الملكية | سديم</title>
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/logo.png') }}">
-
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Agatha.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;700&family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
-    <style>
-        :root { 
-            --sadeem-bg: #0d0211; 
-            --royal-gold: linear-gradient(135deg, #c5a059 0%, #f1d38e 50%, #b38b47 100%);
-            --soft-gold: #c5a059;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border-gold: rgba(197, 160, 89, 0.2);
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        body { 
-            font-family: 'Tajawal', sans-serif; 
-            background: var(--sadeem-bg);
-            color: #f5f1eb; margin: 0; line-height: 1.6; overflow-x: hidden;
-        }
 
-        /* --- Header --- */
-        header { 
-            background: rgba(13, 2, 17, 0.95); backdrop-filter: blur(15px);
-            padding: 12px 5%; display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid var(--border-gold); position: sticky; top: 0; z-index: 1000;
-        }
-        
-        .brand { display: flex; flex-direction: column; text-decoration: none; }
-        .brand .top { font-family: 'Cinzel', serif; color: var(--soft-gold); letter-spacing: 2px; font-size: 1.2rem; font-weight: 700; }
-        .brand .sub { color: #fff; font-size: 0.6rem; opacity: 0.6; letter-spacing: 1px; text-align: center; }
-
-        .nav-links-desktop { display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0; }
-        .nav-links-desktop a { text-decoration: none; color: #dfb6b2; font-size: 0.95rem; transition: var(--transition); font-weight: 500; }
-        .nav-links-desktop a:hover { color: var(--soft-gold); text-shadow: 0 0 8px rgba(197, 160, 89, 0.4); }
-
-        /* --- Sidebar المطور --- */
-        .sidebar {
-            position: fixed; top: 0; right: -300px; width: 280px; height: 100%;
-            background: #14051a; border-left: 1px solid var(--border-gold);
-            z-index: 2000; transition: var(--transition); display: flex; flex-direction: column;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.9);
-        }
-        .sidebar.active { right: 0; }
-
-        .sidebar-header {
-            padding: 25px 20px; display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid var(--border-gold); background: rgba(0,0,0,0.2);
-        }
-        .sidebar-header span { font-family: 'Cinzel', serif; color: var(--soft-gold); font-weight: bold; font-size: 1.1rem; }
-
-        .sidebar ul { list-style: none; padding: 20px 0; margin: 0; }
-        .sidebar ul li { margin: 5px 15px; }
-        .sidebar ul li a {
-            text-decoration: none; color: #f5f1eb; font-size: 1rem; display: flex;
-            align-items: center; gap: 15px; padding: 12px 15px; border-radius: 12px; transition: var(--transition);
-        }
-        .sidebar ul li a i { color: var(--soft-gold); width: 25px; text-align: center; font-size: 1.2rem; }
-        .sidebar ul li a:hover { background: rgba(197, 160, 89, 0.1); color: var(--soft-gold); }
-
-        .sidebar-divider { height: 1px; background: var(--border-gold); margin: 15px 30px; opacity: 0.3; }
-
-        .menu-btn { background: none; border: none; color: var(--soft-gold); font-size: 1.5rem; cursor: pointer; display: none; }
-        
-        .overlay { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(0,0,0,0.8); z-index: 1500; display: none; opacity: 0; transition: 0.3s;
-        }
-        .overlay.active { display: block; opacity: 1; }
-
-        /* --- About Section --- */
-        .about-agatha {
-            padding: 40px 5%; display: flex; align-items: center; gap: 40px;
-            background: linear-gradient(to left, rgba(197, 160, 89, 0.05), transparent);
-            margin: 40px 5%; border-radius: 24px; border: 1px solid var(--border-gold);
-        }
-        .about-img { width: 180px; height: 180px; object-fit: cover; border-radius: 50%; border: 3px solid var(--soft-gold); box-shadow: 0 0 20px rgba(197, 160, 89, 0.2); }
-        .about-content h2 { font-size: 2.2rem; margin-bottom: 15px; }
-
-        /* --- Book Grid --- */
-        .book-grid { 
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
-            gap: 25px; padding: 30px 5%; 
-        }
-        .book-card { 
-            background: var(--glass); border: 1px solid var(--border-gold); 
-            border-radius: 15px; padding: 15px; transition: var(--transition); 
-            text-align: center; position: relative; overflow: hidden;
-        }
-        .book-card:hover { 
-            transform: translateY(-10px); background: rgba(255, 255, 255, 0.06);
-            border-color: var(--soft-gold); box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-        }
-        .cover-container { border-radius: 10px; overflow: hidden; aspect-ratio: 2/3; margin-bottom: 15px; background: #1a0b1e; }
-        .cover-container img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
-        .book-card:hover img { transform: scale(1.05); }
-
-        .btn-royal {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 10px 20px; border: 1px solid var(--soft-gold); border-radius: 8px;
-            text-decoration: none; color: var(--soft-gold); font-size: 0.85rem; transition: var(--transition);
-            width: 100%; box-sizing: border-box;
-        }
-        .btn-royal:hover { background: var(--soft-gold); color: #000; font-weight: bold; }
-
-        /* --- Footer --- */
-        .legal-footer { padding: 50px 8%; background: rgba(5, 1, 7, 0.8); border-top: 1px solid var(--border-gold); text-align: center; margin-top: 50px; }
-
-        @media (max-width: 992px) {
-            .nav-links-desktop { display: none; }
-            .menu-btn { display: block; }
-            .about-agatha { flex-direction: column; text-align: center; gap: 20px; }
-            .about-img { width: 140px; height: 140px; }
-        }
-        .progress-container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 0 5%;
-    text-align: center;
-}
-
-.progress-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-    color: var(--soft-gold);
-}
-
-.progress-bar-bg {
-    width: 100%;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-    border: 1px solid var(--border-gold);
-    overflow: hidden;
-}
-
-.progress-bar-fill {
-    height: 100%;
-    background: var(--royal-gold); /* التدرج الذهبي الذي استخدمناه */
-    box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
-    transition: width 1.5s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-/* تنسيق للهاتف */
-@media (max-width: 768px) {
-    .progress-info { font-size: 0.8rem; }
-}
-    </style>
 </head>
 <body>
 
@@ -161,55 +17,44 @@
 
 <nav class="sidebar" id="sidebar">
     <div class="sidebar-header">
-        <span>SADEEM MENU</span>
-        <div style="cursor: pointer; color: var(--soft-gold);" onclick="toggleMenu()">
-            <i class="fa-solid fa-xmark fa-xl"></i>
-        </div>
+        <span style="font-family: 'Cinzel'; color: var(--soft-gold);">SADEEM</span>
+        <i class="fa-solid fa-xmark fa-xl" onclick="toggleMenu()" style="cursor:pointer; color:var(--soft-gold)"></i>
     </div>
     <ul>
-        <li><a href="#home"><i class="fa-solid fa-house"></i> الرئيسية</a></li>
+        <li><a href="{{ url_for('main.index') }}">الرئيسية</a></li>
+
         <li><a href="{{url_for('admin.show_services')}}"><i class="fa-solid fa-gem"></i> خدماتنا</a></li>
         <li><a href="{{url_for('main.about')}}"><i class="fa-solid fa-feather-pointed"></i> من نحن</a></li>
         <li><a href="mailto:thazraa2019@gmail.com"><i class="fa-solid fa-envelope"></i> اتصل بنا</a></li>
-        
-        <div class="sidebar-divider"></div>
-        
-        <li><a href="{{ url_for('loading_bp.login') }}" style="color: var(--soft-gold); font-weight: bold;"><i class="fa-solid fa-right-to-bracket"></i> تسجيل دخول</a></li>
     </ul>
 </nav>
 
 <header>
-    <div class="nav-right">
-        <button class="menu-btn" onclick="toggleMenu()">
-            <i class="fa-solid fa-bars-staggered"></i>
-        </button>
-    </div>
-
+    <button class="menu-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars-staggered"></i></button>
     <a href="{{ url_for('loading_bp.landing_page') }}" class="brand">
         <span class="top">SADEEM</span>
         <span class="sub">ROYAL LIBRARY</span>
     </a>
-
     <ul class="nav-links-desktop">
-        <li><a href="#home">الرئيسية</a></li>
+        <li><a href="{{ url_for('main.index') }}">الرئيسية</a></li>
+
         <li><a href="{{url_for('admin.show_services')}}">خدماتنا</a></li>
         <li><a href="{{url_for('main.about')}}">من نحن</a></li>
     </ul>
-
     <div class="user-action">
         {% if session.user_id %}
             <a href="{{ url_for('loading_bp.account') }}" style="color: var(--soft-gold);"><i class="fa-regular fa-circle-user fa-xl"></i></a>
         {% else %}
-            <a href="{{ url_for('loading_bp.login') }}" class="btn-royal" style="padding: 6px 20px; width: auto;">دخول</a>
+            <a href="{{ url_for('loading_bp.login') }}" class="btn-royal" style="padding: 6px 20px;">دخول</a>
         {% endif %}
     </div>
 </header>
 
 <section class="about-agatha">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Agatha_Christie.png" alt="Agatha Christie" class="about-img">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/Agatha_Christie.png" alt="Agatha" class="about-img">
     <div class="about-content">
         <h2 style="color: var(--soft-gold); font-family: 'Amiri', serif;">أجاثا كريستي.. سيدة الغموض</h2>
-        <p style="max-width: 600px;">الروائية الأكثر مبيعاً في التاريخ؛ خطّت بعبقريتها 66 رواية بوليسية و14 مجموعة قصصية غيّرت وجه الأدب العالمي للأبد.</p>
+        <p>الروائية الأكثر مبيعاً في التاريخ؛ اكتشف عالم الجريمة والذكاء عبر مكتبتنا الملكية.</p>
     </div>
 </section>
 
@@ -217,51 +62,91 @@
     {% set total_books = 66 %}
     {% set current_books = books|length %}
     {% set percent = (current_books / total_books * 100)|round|int %}
-    
-    <div class="progress-info">
-        <span>اكتمل رفع <strong>{{ current_books }}</strong> من أصل <strong>{{ total_books }}</strong> رواية</span>
+    <div style="display:flex; justify-content:space-between; margin-bottom:8px; color:var(--soft-gold); font-size:0.9rem;">
+        <span>اكتمل رفع <strong>{{ current_books }}</strong> من {{ total_books }}</span>
         <span>{{ percent }}%</span>
     </div>
-    <div class="progress-bar-bg">
-        <div class="progress-bar-fill" style="width: {{ percent }}%;"></div>
-    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: {{ percent }}%;"></div></div>
 </section>
 
 <div class="book-grid">
     {% for book in books %}
     <div class="book-card">
         <div class="cover-container">
-            <img src="{{ url_for('Library_Agatha.static', filename='uploads/' + book.cover_path) }}" alt="{{ book.title }}" loading="lazy">
+            <img src="{{ url_for('Library_Agatha.static', filename='uploads/' + book.cover_path) }}?v={{ book.id }}" alt="{{ book.title }}" loading="lazy">
         </div>
-        <h3 style="font-size: 1rem; color: var(--soft-gold); font-family: 'Amiri', serif; min-height: 2.4em; margin-bottom: 15px;">{{ book.title }}</h3>
-        <a href="{{ url_for('Library_Agatha.download_file', book_id=book.id) }}" class="btn-royal">
-            <i class="fa-solid fa-download"></i> تحميل النسخة
-        </a>
-    </div>
-    {% else %}
-    <div class="empty-state">
-        <i class="fa-solid fa-book-open fa-3x" style="margin-bottom: 20px; color: var(--soft-gold);"></i>
-        <p>لا توجد كتب متاحة حالياً.</p>
+        
+        <div class="download-stats">
+            <i class="fa-solid fa-cloud-arrow-down"></i> 
+            <span id="count-{{ book.id }}">{{ book.download_count if book.download_count else 0 }}</span> تحميلة
+        </div>
+
+        <h3 class="book-title">{{ book.title }}</h3>
+        
+        <p style="font-size: 0.8rem; color: #ccc; margin-bottom: 15px; height: 3.2em; overflow: hidden; opacity: 0.7;">
+            {{ book.desc_text | truncate(75) }}
+        </p>
+        
+        {% if session.get('user_id') %}
+            <a href="{{ url_for('Library_Agatha.download_file', book_id=book.id) }}" 
+               class="btn-royal" 
+               onclick="updateCount(event, {{ book.id }}, this.href)">
+                <i class="fa-solid fa-download"></i> تحميل PDF ملكي
+            </a>
+        {% else %}
+            <a href="{{ url_for('loading_bp.login', next=request.path) }}" class="btn-royal" style="border-style: dashed;">
+                <i class="fa-solid fa-lock"></i> سجل دخول للتحميل
+            </a>
+        {% endif %}
     </div>
     {% endfor %}
 </div>
+<section class="source-notice">
+    <div class="source-container">
+        <div class="source-icon"><i class="fa-solid fa-circle-info"></i></div>
+        <div class="source-content">
+            <h4>مصدر الكتب</h4>
+            <p>تم جلب هذه الكتب من موقع <a href="https://archive.org" target="_blank">archive.org</a> بموجب تراخيص المشاع الإبداعي. في حال وجود اعتراض، يرجى <a href="mailto:moslah20040@gmail.com">التواصل معنا</a>.</p>
+        </div>
+    </div>
+</section>
 
 <footer class="legal-footer">
-    <div class="legal-content">
-        <i class="fa-solid fa-scale-balanced" style="color: var(--soft-gold); font-size: 1.8rem; margin-bottom: 15px;"></i>
-        <h4 style="color: var(--soft-gold); font-family: 'Cinzel', serif; letter-spacing: 1px;">INTELLECTUAL PROPERTY</h4>
-        <p style="font-size: 0.85rem; opacity: 0.7; max-width: 500px; margin: 0 auto;">جميع المؤلفات المعروضة تقع ضمن نطاق "الملكية العامة" وفق قوانين حماية حقوق النشر الدولية.</p>
-    </div>
+    <i class="fa-solid fa-scale-balanced" style="color: var(--soft-gold); font-size: 1.5rem; margin-bottom: 10px;"></i>
+    <h4 style="color: var(--soft-gold); font-family: 'Cinzel'; margin: 0 0 10px 0;">INTELLECTUAL PROPERTY</h4>
+    <p style="font-size: 0.8rem; opacity: 0.6;">جميع المؤلفات تقع ضمن نطاق الملكية العامة وفق القوانين الدولية.</p>
 </footer>
 
 <script>
     function toggleMenu() {
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('overlay');
-        sidebar.classList.toggle('active');
-        overlay.classList.toggle('active');
+        document.getElementById('sidebar').classList.toggle('active');
+        document.getElementById('overlay').classList.toggle('active');
     }
     document.getElementById('overlay').onclick = toggleMenu;
+
+    // دالة تحديث العداد اللحظي
+    function updateCount(event, bookId, downloadUrl) {
+        // نرسل طلب تحديث العداد في الخلفية
+        fetch(`/library/increment_download/${bookId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const countSpan = document.getElementById(`count-${bookId}`);
+                if (countSpan) {
+                    countSpan.innerText = data.new_count;
+                    // تأثير وميض بسيط
+                    countSpan.style.color = "#fff";
+                    setTimeout(() => { countSpan.style.color = "var(--soft-gold)"; }, 500);
+                }
+            }
+        })
+        .catch(err => console.error("Error updating counter:", err));
+
+        // لا نمنع سلوك الرابط الأصلي، سيقوم المتصفح ببدء التحميل تلقائياً
+    }
 </script>
 
 </body>

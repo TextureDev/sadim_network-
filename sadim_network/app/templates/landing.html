@@ -22,6 +22,8 @@
             <ul class="nav-menu">
                 <li class="greeting-text">{{ username }}</li>
                 <li><a href="{{ url_for('loading_bp.account') }}">حسابي</a></li>
+                <li><a href="{{ url_for('Library_Agatha.agatha_christie') }}">مكتبة أجاثا</a></li>
+
                 <li><a href="{{ url_for('admin.show_services') }}">خدماتنا</a></li>
                 <li><a href="{{ url_for('main.about') }}">من نحن</a></li>
                 <li><a href="mailto:thazraa2019@gmail.com" class="btn-primary">اتصل بنا</a></li>
@@ -37,6 +39,7 @@
         <ul class="mobile-nav-links">
             <li class="greeting-text">{{ username }}</li>
             <li><a href="{{ url_for('loading_bp.account') }}">حسابي</a></li>
+            <li><a href="{{ url_for('Library_Agatha.agatha_christie') }}">مكتبة أجاثا</a></li>
             <li><a href="{{ url_for('admin.show_services') }}">خدماتنا</a></li>
             <li><a href="{{ url_for('main.about') }}">من نحن</a></li>
             <li><a href="mailto:thazraa2019@gmail.com">اتصل بنا</a></li>
@@ -123,6 +126,58 @@
             </div>
         </div>
     </section>
+<section class="section-padding">
+    <div class="corner-logo">
+        <h2 class="corner-main">كيف نبني في سديم؟</h2>
+        <p>الخدمات والمكتبات… بعقلية واحدة</p>
+    </div>
+
+    <div class="features">
+        <div class="feature">
+            <h3>منهجية البناء</h3>
+            <p>
+                في شبكة سديم، لا فرق بين خدمة رقمية أو مشروع ثقافي.
+                كل ما نطلقه يُبنى بنفس المنهج: تنظيم واضح،
+                هوية ثابتة، وقابلية للتوسع على المدى الطويل.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3>مكتبة أجاثا</h3>
+            <p>
+                مكتبة أجاثا هي أحد مشاريع شبكة سديم.
+                مشروع تحريري منظم، يركّز على تنسيق الكتب،
+                مراجعتها، وتقديم تجربة قراءة نظيفة،
+                بنفس الدقة التي نطبّقها في خدماتنا الرقمية.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3>مكتبات مستقبلية</h3>
+            <p>
+                ما بُني في مكتبة أجاثا ليس حالة منفردة،
+                بل أساس لإطلاق مكتبات رقمية أخرى مستقبلًا،
+                تندرج جميعها تحت منظومة سديم
+                وبنفس المعايير التحريرية.
+            </p>
+        </div>
+
+        <div class="feature">
+            <h3>العمل معنا</h3>
+            <p>
+                شبكة سديم ترحّب بالمساهمات الجادة.
+                باب الانضمام مفتوح لمن يمتلك القدرة على
+                تحرير الكتب، تنسيقها، أو مراجعة محتواها،
+                ضمن إطار من الالتزام والجودة.
+            </p>
+            <p style="opacity:0.8; font-size:0.9rem; margin-top:0.5rem;">
+                سيتم الإعلان لاحقًا عن آلية الانضمام الرسمية.
+            </p>
+        </div>
+    </div>
+</section>
+
+
 <div class="cta-section" style="
     display: flex; 
     flex-direction: column; 
