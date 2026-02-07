@@ -528,17 +528,24 @@ def edit_user(user_id):
         role = request.form['role']
         status = request.form['status']
         password = request.form.get('password')
+        verified = request.form.get('is_verified') == 'on'
         user.name = name
         user.email = email
         user.role = role
         user.status = status
-        user.password_hash = password if password else user.password_hash
+        if password and password.strip():
+            user.password_hash = password  # تأكد من أن setter الخاص بك يقوم بالتجزئة
+        user.is_verified = verified
         user.update_user()
 
         flash('تم تحديث المستخدم بنجاح', 'success')
         return redirect(url_for('admin.admin_users_list'))
 
     return render_template('dashboard/edit_user.html', user=user)
+
+
+
+
 
 @admin_bp.route('/soft_delete_user/<int:user_id>', methods=['POST'])
 @login_required

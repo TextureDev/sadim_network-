@@ -32,22 +32,29 @@ def login():
         if not email or not password:
             flash("erros")
             return render_template("auth/login.html", error="بيانات الدخول غير صحيحة")
+        
         user = User.authenticate(email, password)
+
         if not user:
             return render_template("auth/login.html", error="بيانات الدخول غير صحيحة")
         
         if not user.is_verified and user.role !='admin':
+
             return render_template("auth/login.html", error="يرجي التحقق من بريدك الإلكتروني قبل تسجيل الدخول.")
         
-        user.updated_at = datetime.now()
+        # بعد التحقق من المستخدم ونجاح تسجيل الدخول
+        user.last_login = datetime.now()
+
         user_update.update_user(user)
+
         
 
         session.clear()
         session['user_id'] = user.id
         session['role'] = user.role
         session['username'] = user.username
-    
+        session['last_login'] = user.last_login.strftime("%Y-%m-%d %H:%M:%S")
+        
         if user.role == 'admin':
             return redirect(url_for('admin.services_dashboard'))  # اسم الدالة في Blueprint dashboard
         else:

@@ -132,14 +132,35 @@ tr:hover {
 
 <div class="top-nav">
     <a href="{{ url_for('admin.add_user') }}">
-        <button><i class="fas fa-user-plus"></i> إضافة مستخدم جديد</button>
+        <button type="button"><i class="fas fa-user-plus"></i> إضافة مستخدم جديد</button>
     </a>
     <a href="{{ url_for('admin.dashboard_home') }}">
-        <button><i class="fas fa-home"></i> العودة للرئيسية</button>
+        <button type="button"><i class="fas fa-home"></i> العودة للرئيسية</button>
     </a>
     <a href="{{ url_for('admin.services_dashboard') }}">
-        <button><i class="fas fa-concierge-bell"></i> إدارة الخدمات</button>
+        <button type="button"><i class="fas fa-concierge-bell"></i> إدارة الخدمات</button>
+    </a>
 </div>
+
+<div style="margin-bottom: 1rem; max-width: 400px;">
+    <input
+        type="text"
+        id="userSearch"
+        placeholder="🔍 بحث عن مستخدم..."
+        onkeyup="filterUsers()"
+        onkeydown="return event.key !== 'Enter'"
+        style="
+            width: 100%;
+            padding: 0.6rem 0.8rem;
+            border-radius: 8px;
+            border: 1px solid var(--color-accent);
+            background: rgba(255,255,255,0.03);
+            color: var(--color-light);
+            font-size: 0.9rem;
+        "
+    >
+</div>
+
 
 <div class="table-container">
     <table>
@@ -170,7 +191,10 @@ tr:hover {
                     {{ u.status }}
                 </td>
                 <td>{{ '✔' if u.is_verified else '✖' }}</td>
-                <td style="font-size: 0.75rem; opacity: 0.7;">{{ u.last_login }}</td>
+                <td style="font-size: 0.75rem; opacity: 0.7;">
+                 {{ u.last_login.strftime('%Y-%m-%d %H:%M:%S') if u.last_login else '-' }}
+                </td>
+
                 <td class="action-links">
                     <a href="{{ url_for('admin.view_user', user_id=u.id) }}" title="عرض"><i class="fas fa-eye"></i></a>
                     <a href="{{ url_for('admin.edit_user', user_id=u.id) }}" title="تعديل"><i class="fas fa-edit"></i></a>
@@ -190,3 +214,17 @@ tr:hover {
 <p style="color: var(--color-light); font-size: 0.8rem; margin-top: 1rem; opacity: 0.6;">
     <i class="fas fa-info-circle"></i> ملاحظة: تمرير الجدول جانبياً لمشاهدة كافة البيانات على الجوال.
 </p>
+<script>
+function filterUsers() {
+    const input = document.getElementById("userSearch");
+    const filter = input.value.toLowerCase();
+    const rows = document.querySelectorAll("table tbody tr");
+
+    rows.forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(filter)
+            ? ""
+            : "none";
+    });
+}
+</script>
+

@@ -39,6 +39,16 @@
         </div>
 
         <div class="nebula-form-group">
+         <label><i class="fas fa-check-circle"></i> حالة التحقق من البريد</label>
+           <div class="verification-wrapper">
+               <span class="verification-status-text">تم التحقق من الحساب</span>
+               <label class="switch-container">
+                   <input type="checkbox" id="is_verified" name="is_verified" class="nebula-checkbox" {% if user.is_verified %}checked{% endif %}>
+                   <div class="toggle-switch"></div>
+               </label>
+           </div>
+        </div>
+        <div class="nebula-form-group">
             <label for="status"><i class="fas fa-toggle-on"></i> حالة الحساب</label>
             <select class="nebula-select" id="status" name="status">
                 <option value="active" {% if user.status == 'active' %}selected{% endif %}>🟢 نشط (Active)</option>

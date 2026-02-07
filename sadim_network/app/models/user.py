@@ -215,6 +215,11 @@ class User:
     def _row_to_user(row):
         if not row:
             return None
+    
+        last_login = row[9]
+        if last_login and isinstance(last_login, str):
+            last_login = datetime.strptime(last_login, "%Y-%m-%d %H:%M:%S.%f")
+    
         return User(
             id=row[0],
             username=row[1],
@@ -225,10 +230,9 @@ class User:
             password_hash=row[6],
             role=row[7],
             profile_image=row[8],
-            last_login=row[9],
+            last_login=last_login,  # ← استخدم المتغير المحول هنا
             status=row[10],
             is_verified=row[11],
             created_at=row[12],
             updated_at=row[13]
         )
-

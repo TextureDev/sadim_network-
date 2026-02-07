@@ -146,6 +146,23 @@ body {
 .register-link a:hover {
   text-decoration: underline;
 }
+/* Activation / Pending Account Note */
+.login-note {
+  background-color: rgba(241, 196, 15, 0.12);
+  color: #8a6d1d;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius);
+  border-right: 4px solid #f1c40f;
+  margin-block-end: 1.2rem;
+  font-size: 0.85rem;
+  text-align: right;
+  line-height: 1.6;
+}
+
+.login-note strong {
+  font-weight: 700;
+  color: #7a5c12;
+}
 
 /* Responsive Adjustments */
 @media (max-width: 480px) {

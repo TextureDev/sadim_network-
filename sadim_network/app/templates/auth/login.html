@@ -26,12 +26,17 @@
     <h1>تسجيل الدخول</h1>
 
     <!-- رسالة خطأ (مخفية افتراضياً) -->
-   {% if error %}
-   <div class="error-message" style="display:block">
-     {{ error }}
-   </div>
-   {% endif %}
-   
+  {% if error %}
+  <div class="error-message" style="display:block">
+    {{ error }}
+  </div>
+  
+  <div class="login-note">
+    ملاحظة: في حال تعذّر تسجيل الدخول، قد يكون حسابك قيد التفعيل.
+    يتم تفعيل الحسابات الجديدة خلال مدة لا تتجاوز <strong>24 ساعة</strong>.
+  </div>
+  {% endif %}
+
 
 
 
